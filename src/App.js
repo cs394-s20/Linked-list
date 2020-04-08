@@ -18,6 +18,10 @@ function App() {
           Sandra, too!
         </p>
 
+        <p>
+          Margot is also!
+        </p>
+
         <a
           className="App-link"
           href="https://reactjs.org"
