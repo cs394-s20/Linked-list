@@ -14,6 +14,9 @@ function App() {
         <p>
           Kiara is here.
         </p>
+        <p>
+          Sandra, too!
+        </p>
 
         <a
           className="App-link"
