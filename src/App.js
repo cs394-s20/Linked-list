@@ -22,6 +22,10 @@ function App() {
           Margot is also!
         </p>
 
+        <p>
+          And Ava!
+        </p>
+
         <a
           className="App-link"
           href="https://reactjs.org"
