@@ -1,0 +1,86 @@
+{
+    "folder": "home",
+    "content": [
+        {
+            "folder": "CS 394",
+            "content": [
+                {
+                    "link-name": "Course Website",
+                    "link-url": "https://courses.cs.northwestern.edu/394/",
+                    "link-notes": ""
+                },
+                {
+                    "link-name": "GitHub Page",
+                    "link-url": "https://github.com/orgs/cs394-s20/teams/red",
+                    "link-notes": ""
+                },
+                {
+                    "link-name": "Zoom Class Meeting",
+                    "link-url": "https://northwestern.zoom.us/j/488400770?pwd=aGpCa1pJdlk1bDMwaU9vTEo1UlROQT09",
+                    "link-notes": "no password"
+                },
+                {
+                    "folder": "React Resources",
+                    "content": [
+                        {
+                            "link-name": "Quick React",
+                            "link-url": "https://courses.cs.northwestern.edu/394/intro-react.php",
+                            "link-notes": ""
+                        },
+                        {
+                            "link-name": "Learn, React",
+                            "link-url": "https://courses.cs.northwestern.edu/394/learn-react.php",
+                            "link-notes": ""
+                        },
+                        {
+                            "link-name": "Rbx Documentation",
+                            "link-url": "https://courses.cs.northwestern.edu/394/learn-react.php",
+                            "link-notes": ""
+                        },
+                        {
+                            "link-name": "Firebase Notes",
+                            "link-url": "https://courses.cs.northwestern.edu/394/firebase-notes.php",
+                            "link-notes": ""
+                        }
+                    ]
+                }
+
+            ]
+        },
+        {
+            "link-name": "Canvas Login Page",
+            "link-url": "https://canvas.northwestern.edu",
+            "link-notes": "username and password: NU NetID and password"
+        },
+        {
+            "folder": "CS 212",
+            "content": [
+                {
+                    "link-name": "212 Canvas Page",
+                    "link-url": "https://canvas.northwestern.edu/courses/111842",
+                    "link-notes": "username and password: NU NetID and password"
+                },
+                {
+                    "folder": "Zoom Meetings",
+                    "content": [
+                        {
+                            "link-name": "Lecture MWF 3-3:50",
+                            "link-url": "https://northwestern.zoom.us/j/617633773",
+                            "link-notes": "password: 780439"
+                        },
+                        {
+                            "link-name": "Discussion WTh 5-5:50",
+                            "link-url": "https://northwestern.zoom.us/j/613342554",
+                            "link-notes": "password: 561722"
+                        },
+                        {
+                            "link-name": "Instructor OH MWF 2-2:50",
+                            "link-url": "https://northwestern.zoom.us/j/432334339",
+                            "link-notes": "no password"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
