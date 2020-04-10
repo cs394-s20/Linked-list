@@ -6,6 +6,10 @@ import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import './index.css';
 
+const closeModal = () => {
+  document.getElementById("openModal").style.display="none";
+  document.getElementById("add-link").style.display="block"
+}
 const OpenModal = () => {
   // const link = prompt('Enter link here')
   return (
@@ -26,7 +30,7 @@ const OpenModal = () => {
           </Field>
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
-            <Button onClick = { () => document.getElementById("openModal").style.display="none"}>Cancel</Button>
+            <Button onClick = { () => closeModal()}>Cancel</Button>
             <Button>Add Link</Button>
           </Button.Group>
     </div>
