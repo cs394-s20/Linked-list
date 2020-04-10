@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import AddLink from './AddLink';
+
 // Karen Bao
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
@@ -15,39 +17,17 @@ const firebaseConfig = {
   measurementId: "G-S641Y5RGW1"
 };
 firebase.initializeApp(firebaseConfig);
+
+
+
+
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Kiara is here.
-        </p>
-        <p>
-          Sandra, too!
-        </p>
-
-        <p>
-          Margot is also!
-        </p>
-
-        <p>
-          And Ava!
-        </p>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AddLink/>
     </div>
+   
   );
 }
 
