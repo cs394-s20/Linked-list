@@ -1,10 +1,14 @@
-import React from 'react';
+
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import  ItemList  from './Components/ItemList'
+import data from "./data.json"
+import { Container } from 'rbx';
 import AddLink from './AddLink';
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
   authDomain: "linx-22a8d.firebaseapp.com",
   databaseURL: "https://linx-22a8d.firebaseio.com",
@@ -16,14 +20,18 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database().ref();
-
+  
 function App() {
 
+  const [path, setPath] = useState('/home');
+
+  console.log(data)
+
   return (
-    <div>
+    <Container>
       <AddLink/>
-    </div>
-   
+      <ItemList state = { {path, setPath} } items= { data }/>
+    </Container>
   );
 }
 
