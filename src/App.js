@@ -33,7 +33,7 @@ function App() {
         <AddLink/>
       </Section>
       <Section>
-        <Title>Current Directory</Title>
+        <Title>Current Directory: { path }</Title>
         <ItemList state = { {path, setPath} } items= { data }/>
       </Section>
     </Container>

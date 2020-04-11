@@ -56,7 +56,7 @@ const OpenModal = () => {
   )
 };
 
-const AddLink = ({}) => {
+const AddLink = () => {
   
   const openForm = () => {
     document.getElementById("openModal").style.display="block";
