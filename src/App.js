@@ -1,13 +1,13 @@
+
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 import data from "./data.json"
 import { Container } from 'rbx';
+import AddLink from './AddLink';
 
-//Karen  Bao
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
   authDomain: "linx-22a8d.firebaseapp.com",
@@ -19,7 +19,8 @@ const firebaseConfig = {
   measurementId: "G-S641Y5RGW1"
 };
 firebase.initializeApp(firebaseConfig);
-
+const db = firebase.database().ref();
+  
 function App() {
 
   const [path, setPath] = useState('/home');
@@ -28,9 +29,9 @@ function App() {
 
   return (
     <Container>
+      <AddLink/>
       <ItemList state = { {path, setPath} } items= { data }/>
     </Container>
-
   );
 }
 
