@@ -4,7 +4,6 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import AddLink from './AddLink';
 
-// Karen Bao
 var firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
   authDomain: "linx-22a8d.firebaseapp.com",
@@ -17,10 +16,6 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database().ref();
-//var FbApp = firebase.initializeApp(firebaseConfig);
-//module.exports.FBApp = FbApp.database();
-
-//const db = FbApp.database().ref();
 
 function App() {
 
