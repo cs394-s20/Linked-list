@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
-// Karen Bao
+import  ItemList  from './Components/ItemList'
+import data from "./data.json"
+import { Container } from 'rbx';
+
+//Karen  Bao
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
   authDomain: "linx-22a8d.firebaseapp.com",
@@ -15,39 +19,18 @@ const firebaseConfig = {
   measurementId: "G-S641Y5RGW1"
 };
 firebase.initializeApp(firebaseConfig);
+
 function App() {
+
+  const [path, setPath] = useState('/home');
+
+  console.log(data)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Kiara is here.
-        </p>
-        <p>
-          Sandra, too!
-        </p>
+    <Container>
+      <ItemList state = { {path, setPath} } items= { data }/>
+    </Container>
 
-        <p>
-          Margot is also!
-        </p>
-
-        <p>
-          And Ava!
-        </p>
-
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
   );
 }
 
