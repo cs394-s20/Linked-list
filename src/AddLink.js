@@ -49,7 +49,7 @@ const OpenModal = () => {
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button onClick = { () => updateJSON()}>Add Link</Button>
+            <Button color="link" onClick = { () => updateJSON()}>Add Link</Button>
           </Button.Group>
     </div>
 
@@ -68,7 +68,7 @@ const AddLink = ({}) => {
       <div id="openModal" style={{ display: "None" }}>
         <OpenModal></OpenModal>
       </div>
-      <Button id="add-link" onClick = { () =>  openForm()} >
+      <Button color="link" id="add-link" onClick = { () =>  openForm()} >
         Add Link
       </Button>
     </Container>

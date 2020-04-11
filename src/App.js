@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 import data from "./data.json"
-import { Container } from 'rbx';
+import { Container, Section, Title } from 'rbx';
 import AddLink from './AddLink';
 
 const firebaseConfig = {
@@ -29,8 +29,13 @@ function App() {
 
   return (
     <Container>
-      <AddLink/>
-      <ItemList state = { {path, setPath} } items= { data }/>
+      <Section>
+        <AddLink/>
+      </Section>
+      <Section>
+        <Title>Current Directory</Title>
+        <ItemList state = { {path, setPath} } items= { data }/>
+      </Section>
     </Container>
   );
 }
