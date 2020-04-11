@@ -5,6 +5,9 @@ import 'firebase/database';
 import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import './index.css';
+import FbApp from './modules/firebase.js';
+
+const db = FbApp.ref();
 
 const closeModal = () => {
   document.getElementById("openModal").style.display="none";
@@ -38,6 +41,23 @@ const OpenModal = () => {
   )
 };
 
+const updateJSON = () => {
+  var item = {
+    name: "Google",
+    type: "link",
+    path: "/home/",
+    linkurl: "www.google.com"
+  };
+  // Get a key for a new Post.
+  var newItemKey = db.child('items').push().key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  var updates = {};
+  updates['/items/' + newItemKey] = item;
+
+  return db.update(updates);
+}
+
 const AddLink = ({}) => {
   
   const openForm = () => {
@@ -50,7 +70,7 @@ const AddLink = ({}) => {
       <div id="openModal" style={{ display: "None" }}>
         <OpenModal></OpenModal>
       </div>
-      <Button id="add-link" onClick = { () =>  openForm()} >
+      <Button id="add-link" onClick = { () =>  updateJSON()} >
         Add Link
       </Button>
     </Container>

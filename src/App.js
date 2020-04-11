@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -16,10 +15,10 @@ const firebaseConfig = {
   appId: "1:420143947697:web:0cd132179c292b91006790",
   measurementId: "G-S641Y5RGW1"
 };
-firebase.initializeApp(firebaseConfig);
+var FbApp = firebase.initializeApp(firebaseConfig);
+module.exports.FBApp = FbApp.database();
 
-
-
+const db = FbApp.database().ref();
 
 function App() {
 
