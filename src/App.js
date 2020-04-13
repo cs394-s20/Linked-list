@@ -5,8 +5,9 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 //import data from "./data.json"
-import { Container, Section, Title } from 'rbx';
+import { Container, Section, Title, Button } from 'rbx';
 import AddLink from './Components/AddLink';
+import AddFolder from './Components/AddFolder';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
@@ -42,8 +43,8 @@ function App() {
   return (
     <Container>
       <Section>
-        
         <AddLink state = { {path, setPath} } />
+        <AddFolder state = { {path, setPath} } />
       </Section>
       <Section>
         <Title>Current Directory: { path }</Title>
