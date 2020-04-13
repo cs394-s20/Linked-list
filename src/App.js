@@ -28,7 +28,7 @@ function App() {
   const [data, setData] = useState({items: {}});
 
   useEffect(() => {
-    console.log("running useEffect");
+    //console.log("running useEffect");
     const handleData = snap => {
       if (snap.val()) setData(snap.val());
     }
@@ -36,13 +36,14 @@ function App() {
     return () => { db.off('value', handleData); };
   }, []);
 
-  console.log(data.items);
+  //console.log(data.items);
 
 
   return (
     <Container>
       <Section>
-        <AddLink/>
+        
+        <AddLink state = { {path, setPath} } />
       </Section>
       <Section>
         <Title>Current Directory: { path }</Title>

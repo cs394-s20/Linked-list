@@ -11,13 +11,14 @@ const closeModal = () => {
   document.getElementById("add-link").style.display="block";
 }
 
-const updateJSON = () => {
+const updateJSON = ( { state } ) => {
   var item = {
     "name": document.getElementById('linkTitle').value,
     "type": "link",
-    "path": "/home",
+    "path": state.path,
     "url": document.getElementById('linkUrl').value
   };
+  //console.log(state.path);
   // Get a key for a new Post.
   var newItemKey = firebase.database().ref().child('items').push().key;
 
@@ -29,7 +30,8 @@ const updateJSON = () => {
   return;
 }
 
-const OpenModal = () => {
+const OpenModal = ( { state }) => {
+//console.log(state.path);
   return (
     <div style={{color: "white !important"}}>
         <Modal.Background />
@@ -49,15 +51,15 @@ const OpenModal = () => {
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="link" onClick = { () => updateJSON()}>Add Link</Button>
+            <Button color="link" onClick = { () => updateJSON({state})}>Add Link</Button>
           </Button.Group>
     </div>
 
   )
 };
 
-const AddLink = () => {
-  
+const AddLink = ( { state } ) => {
+  //console.log(state);
   const openForm = () => {
     document.getElementById("openModal").style.display="block";
     document.getElementById("add-link").style.display="None";
@@ -66,7 +68,7 @@ const AddLink = () => {
   return (
     <Container>
       <div id="openModal" style={{ display: "None" }}>
-        <OpenModal></OpenModal>
+        <OpenModal state={ state } ></OpenModal>
       </div>
       <Button color="link" id="add-link" onClick = { () =>  openForm()} >
         Add Link
