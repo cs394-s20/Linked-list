@@ -1,13 +1,13 @@
+
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
-import data from "./data.json"
-import { Container } from 'rbx';
+//import data from "./data.json"
+import { Container, Section, Title } from 'rbx';
+import AddLink from './Components/AddLink';
 
-//Karen  Bao
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
   authDomain: "linx-22a8d.firebaseapp.com",
@@ -19,18 +19,36 @@ const firebaseConfig = {
   measurementId: "G-S641Y5RGW1"
 };
 firebase.initializeApp(firebaseConfig);
-
+const db = firebase.database().ref();
+  
 function App() {
 
   const [path, setPath] = useState('/home');
 
-  console.log(data)
+  const [data, setData] = useState({items: {}});
+
+  useEffect(() => {
+    console.log("running useEffect");
+    const handleData = snap => {
+      if (snap.val()) setData(snap.val());
+    }
+    db.on('value', handleData, error => alert(error));
+    return () => { db.off('value', handleData); };
+  }, []);
+
+  console.log(data.items);
+
 
   return (
     <Container>
-      <ItemList state = { {path, setPath} } items= { data }/>
+      <Section>
+        <AddLink/>
+      </Section>
+      <Section>
+        <Title>Current Directory: { path }</Title>
+        <ItemList state = { {path, setPath} } itemState = { { data, setData } }/>
+      </Section>
     </Container>
-
   );
 }
 
