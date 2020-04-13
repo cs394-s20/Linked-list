@@ -7,17 +7,16 @@ import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
 
 const closeModal = () => {
-  document.getElementById("openModal").style.display="none";
-  document.getElementById("add-link").style.display="block";
+  document.getElementById("folderModal").style.display="none";
   document.getElementById("add-folder").style.display="block";
+  document.getElementById("add-link").style.display="block";
 }
 
 const updateJSON = ( { state } ) => {
   var item = {
-    "name": document.getElementById('linkTitle').value,
-    "type": "link",
+    "name": document.getElementById('folderTitle').value,
+    "type": "folder",
     "path": state.path,
-    "url": document.getElementById('linkUrl').value
   };
   //console.log(state.path);
   // Get a key for a new Post.
@@ -26,8 +25,7 @@ const updateJSON = ( { state } ) => {
   // Write the new post's data simultaneously in the posts list and the user's post list.
   firebase.database().ref("items/" + newItemKey).set(item);
   closeModal();
-  document.getElementById('linkTitle').value = "";
-  document.getElementById('linkUrl').value = "";
+  document.getElementById('folderTitle').value = "";
   return;
 }
 
@@ -38,46 +36,40 @@ const OpenModal = ( { state }) => {
         <Modal.Background />
           <Modal.Content>
           <Field>
-            <Label style={{color:"white !important"}}>Link Title</Label>
+            <Label style={{color:"white !important"}}>Folder Title</Label>
             <Control>
-              <Input id="linkTitle" type="text" placeholder="Google" />
-            </Control>
-          </Field>
-          <Field>
-            <Label>Link URL</Label>
-            <Control>
-              <Input id="linkUrl" type="text" placeholder="www.google.com" />
+              <Input id="folderTitle" type="text" placeholder="Classes" />
             </Control>
           </Field>
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="link" onClick = { () => updateJSON({state})}>Add Link</Button>
+            <Button color="danger" onClick = { () => updateJSON({state})}>Create Folder</Button>
           </Button.Group>
     </div>
 
   )
 };
 
-const AddLink = ( { state } ) => {
+const AddFolder = ( { state } ) => {
   //console.log(state);
   const openForm = () => {
-    document.getElementById("openModal").style.display="block";
-    document.getElementById("add-link").style.display="None";
+    document.getElementById("folderModal").style.display="block";
     document.getElementById("add-folder").style.display="None";
+    document.getElementById("add-link").style.display="None";
   }
 
   return (
     <Container>
-      <div id="openModal" style={{ display: "None" }}>
+      <div id="folderModal" style={{ display: "None" }}>
         <OpenModal state={ state } ></OpenModal>
       </div>
-      <Button color="link" id="add-link" onClick = { () =>  openForm()} >
-        Add Link
+      <Button color="danger" id="add-folder" onClick = { () =>  openForm()} >
+        Create Folder
       </Button>
     </Container>
   )
 
 };
 
-export default AddLink;
+export default AddFolder;

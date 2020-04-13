@@ -5,9 +5,10 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 //import data from "./data.json"
-import { Container, Section, Title } from 'rbx';
+import { Container, Section, Title, Button } from 'rbx';
 import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
+import AddFolder from './Components/AddFolder';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
@@ -29,7 +30,7 @@ function App() {
   const [data, setData] = useState({items: {}});
 
   useEffect(() => {
-    console.log("running useEffect");
+    //console.log("running useEffect");
     const handleData = snap => {
       if (snap.val()) setData(snap.val());
     }
@@ -37,13 +38,14 @@ function App() {
     return () => { db.off('value', handleData); };
   }, []);
 
-  console.log(data.items);
+  //console.log(data.items);
 
 
   return (
     <Container>
       <Section>
-        <AddLink/>
+          <AddLink state = { {path, setPath} } />
+          <AddFolder state = { {path, setPath} } />
       </Section>
       <Section>
         <BackButton state={ {path, setPath} }/>

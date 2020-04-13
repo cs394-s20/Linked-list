@@ -21,7 +21,7 @@ const classes = ["CS 394", "COMP_LIT 202", "PSYCH 221", "CS 212"];
 
 const chooseItem = (state,item) => {
 
-  console.log("chooseItem");
+  //console.log("chooseItem");
 
   // if(item.type === "Folder"){
   //   console.log("if folder")
@@ -31,7 +31,7 @@ const chooseItem = (state,item) => {
   // }
 
   if(item.type === "Folder"){
-    console.log("if folder")
+    //console.log("if folder")
     return (<Folder name= {item.name} />)
   }else{
     return (<Link name= {item.name} url={item.url}/>)
@@ -41,18 +41,18 @@ const chooseItem = (state,item) => {
 const ItemList = ({ state,itemState }) => {
   
  // const [selected, toggle] = useSelection();
-  console.log(itemState.data)
+  //console.log(itemState.data)
 
     var items = Object.values(itemState.data.items);
-    console.log(items);
+    //console.log(items);
   
     var pathItems = items.filter(item => item.path === state.path);
   // console.log("pathitems");
   // console.log(pathItems);
   // console.log(state);
-  console.log(pathItems);
+  //console.log(pathItems);
    useEffect(() => {
-     console.log("useEffect happened")
+     //console.log("useEffect happened")
       pathItems = items.filter(item => item.path === state.path);
    }, [state.path])
    
