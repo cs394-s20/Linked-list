@@ -7,6 +7,7 @@ import  ItemList  from './Components/ItemList'
 //import data from "./data.json"
 import { Container, Section, Title, Button } from 'rbx';
 import AddLink from './Components/AddLink';
+import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
 
 const firebaseConfig = {
@@ -47,6 +48,7 @@ function App() {
           <AddFolder state = { {path, setPath} } />
       </Section>
       <Section>
+        <BackButton state={ {path, setPath} }/>
         <Title>Current Directory: { path }</Title>
         <ItemList state = { {path, setPath} } itemState = { { data, setData } }/>
       </Section>
