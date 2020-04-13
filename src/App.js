@@ -4,7 +4,7 @@ import './App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
-import data from "./data.json"
+//import data from "./data.json"
 import { Container, Section, Title } from 'rbx';
 import AddLink from './Components/AddLink';
 
@@ -25,7 +25,19 @@ function App() {
 
   const [path, setPath] = useState('/home');
 
-  console.log(data)
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    console.log("running useEffect");
+    const handleData = snap => {
+      if (snap.val()) setData(snap.val());
+    }
+    db.on('value', handleData, error => alert(error));
+    return () => { db.off('value', handleData); };
+  }, []);
+
+  console.log(data.items);
+
 
   return (
     <Container>
@@ -34,7 +46,7 @@ function App() {
       </Section>
       <Section>
         <Title>Current Directory: { path }</Title>
-        <ItemList state = { {path, setPath} } items= { data }/>
+        <ItemList state = { {path, setPath} } itemState = { { data, setData } }/>
       </Section>
     </Container>
   );

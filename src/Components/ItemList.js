@@ -38,28 +38,29 @@ const chooseItem = (state,item) => {
   }
 }
 
-const ItemList = ({ state,items }) => {
+const ItemList = ({ state,itemState }) => {
   
  // const [selected, toggle] = useSelection();
-  var pathItems = items.filter(item => item.path === state.path);
+  console.log(Object.values(itemState.data))
+  // var pathItems = items.filter(item => item.path === state.path);
 
-  console.log("pathitems");
-  console.log(pathItems);
-  console.log(state);
-  //console.log(pathItems);
+  // console.log("pathitems");
+  // console.log(pathItems);
+  // console.log(state);
+  // //console.log(pathItems);
 
-  useEffect(() => {
-    console.log("useEffect happened")
-     pathItems = items.filter(item => item.path === state.path);
-  }, [state.path])
+  // useEffect(() => {
+  //   console.log("useEffect happened")
+  //    pathItems = items.filter(item => item.path === state.path);
+  // }, [state.path])
 
   return (
     <React.Fragment>
       <Button.Group>
-        { 
+        {/* { 
           pathItems.map(item =>
           (item.type === "Folder") ? (<Folder name= {item.name} state={state} />) :  (<Link name= {item.name} url={item.url}/>))
-        }
+        } */}
 
       </Button.Group>
     </React.Fragment>
