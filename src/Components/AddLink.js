@@ -15,8 +15,8 @@ const updateJSON = () => {
   var item = {
     "name": document.getElementById('linkTitle').value,
     "type": "link",
-    "path": "/home/",
-    "link-url": document.getElementById('linkUrl').value
+    "path": "/home",
+    "url": document.getElementById('linkUrl').value
   };
   // Get a key for a new Post.
   var newItemKey = firebase.database().ref().child('items').push().key;

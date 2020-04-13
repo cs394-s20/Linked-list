@@ -25,7 +25,7 @@ function App() {
 
   const [path, setPath] = useState('/home');
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({items: {}});
 
   useEffect(() => {
     console.log("running useEffect");
