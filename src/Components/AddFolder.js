@@ -9,6 +9,7 @@ import '../index.css';
 const closeModal = () => {
   document.getElementById("folderModal").style.display="none";
   document.getElementById("add-folder").style.display="block";
+  document.getElementById("add-link").style.display="block";
 }
 
 const updateJSON = ( { state } ) => {
@@ -55,6 +56,7 @@ const AddFolder = ( { state } ) => {
   const openForm = () => {
     document.getElementById("folderModal").style.display="block";
     document.getElementById("add-folder").style.display="None";
+    document.getElementById("add-link").style.display="None";
   }
 
   return (
