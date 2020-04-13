@@ -1,10 +1,10 @@
 import React from 'react';
-import './App.css';
+import '../App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
-import './index.css';
+import '../index.css';
 
 const closeModal = () => {
   document.getElementById("openModal").style.display="none";

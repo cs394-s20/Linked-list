@@ -6,7 +6,7 @@ import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 import data from "./data.json"
 import { Container, Section, Title } from 'rbx';
-import AddLink from './AddLink';
+import AddLink from './Components/AddLink';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
