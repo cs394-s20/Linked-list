@@ -1,6 +1,8 @@
-import React, { useState, useEffect }from 'react';
+import React from 'react';
 import 'rbx/index.css';
 import { Button } from 'rbx';
+import { Fab } from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
 const atHome = path => {
     return path === "/home"
@@ -14,9 +16,13 @@ const newPath = path => {
 const BackButton = ({ name, state }) => {
     
     
-  return (<Button onClick={ () => state.setPath(newPath(state.path))} disabled = { atHome(state.path) } >
-       { "Back" }
-  </Button>)
+  return (<Fab
+        display="inline"
+        aria-label="add"
+        onClick={ () => state.setPath(newPath(state.path))} 
+        disabled = { atHome(state.path) } >
+        <KeyboardBackspaceIcon />
+  </Fab>)
 
 };
 
