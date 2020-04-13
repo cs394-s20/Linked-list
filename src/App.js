@@ -43,8 +43,8 @@ function App() {
   return (
     <Container>
       <Section>
-        <AddLink state = { {path, setPath} } />
-        <AddFolder state = { {path, setPath} } />
+          <AddLink state = { {path, setPath} } />
+          <AddFolder state = { {path, setPath} } />
       </Section>
       <Section>
         <Title>Current Directory: { path }</Title>

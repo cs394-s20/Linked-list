@@ -43,7 +43,7 @@ const OpenModal = ( { state }) => {
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="link" onClick = { () => updateJSON({state})}>Create Folder</Button>
+            <Button color="danger" onClick = { () => updateJSON({state})}>Create Folder</Button>
           </Button.Group>
     </div>
 
@@ -62,7 +62,7 @@ const AddFolder = ( { state } ) => {
       <div id="folderModal" style={{ display: "None" }}>
         <OpenModal state={ state } ></OpenModal>
       </div>
-      <Button color="link" id="add-folder" onClick = { () =>  openForm()} >
+      <Button color="danger" id="add-folder" onClick = { () =>  openForm()} >
         Create Folder
       </Button>
     </Container>
