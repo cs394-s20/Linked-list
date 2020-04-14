@@ -5,6 +5,8 @@ import 'firebase/database';
 import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
+import { Fab } from '@material-ui/core';
+import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
 
 const closeModal = () => {
   document.getElementById("folderModal").style.display="none";
@@ -64,9 +66,9 @@ const AddFolder = ( { state } ) => {
       <div id="folderModal" style={{ display: "None" }}>
         <OpenModal state={ state } ></OpenModal>
       </div>
-      <Button color="danger" id="add-folder" onClick = { () =>  openForm()} >
-        Create Folder
-      </Button>
+      <Fab color="danger" id="add-folder" onClick = { () =>  openForm()} >
+        <CreateNewFolderIcon/>
+      </Fab>
     </Container>
   )
 

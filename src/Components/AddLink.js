@@ -5,6 +5,9 @@ import 'firebase/database';
 import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
+import { Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+
 
 const closeModal = () => {
   document.getElementById("openModal").style.display="none";
@@ -68,13 +71,14 @@ const AddLink = ( { state } ) => {
   }
 
   return (
-    <Container>
+    <Container >
       <div id="openModal" style={{ display: "None" }}>
         <OpenModal state={ state } ></OpenModal>
       </div>
-      <Button color="link" id="add-link" onClick = { () =>  openForm()} >
-        Add Link
-      </Button>
+      <Fab color="link" id="add-link" onClick = { () =>  openForm()} >
+        <AddIcon />
+        Link
+      </Fab>
     </Container>
   )
 
