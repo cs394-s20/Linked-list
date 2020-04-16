@@ -4,6 +4,7 @@ import { Button } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -14,13 +15,19 @@ const useStyles = makeStyles((theme) => ({
 const Link = ({ name, url }) => {
   const classes = useStyles();
 
-  return (<Button 
+  return (
+  <Button 
               variant="contained"
               color="secondary"
               className={classes.button}
-              startIcon={<OpenInNewIcon />}
-              onClick={ () => window.open(url, "_blank") }
+              startIcon={
+                <Button onClick={ () => window.open(url, "_blank") }> 
+                  <OpenInNewIcon /> 
+                </Button>}
+              //onClick={ () => window.open(url, "_blank") }
   >
+    <Checkbox color="default">
+    </Checkbox>
     { name }
   </Button>)
 };
