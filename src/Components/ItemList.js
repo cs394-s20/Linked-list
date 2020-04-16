@@ -21,15 +21,6 @@ const classes = ["CS 394", "COMP_LIT 202", "PSYCH 221", "CS 212"];
 
 const chooseItem = (state,item) => {
 
-  //console.log("chooseItem");
-
-  // if(item.type === "Folder"){
-  //   console.log("if folder")
-  //   return (<Folder name= {item.name} state={ {path:state.path, setPath:state.setPath} } />)
-  // }else{
-  //   return (<Link name= {item.name} url={item.url}/>)
-  // }
-
   if(item.type === "Folder"){
     //console.log("if folder")
     return (<Folder name= {item.name} />)
@@ -38,21 +29,16 @@ const chooseItem = (state,item) => {
   }
 }
 
+
+
 const ItemList = ({ state,itemState }) => {
-  
- // const [selected, toggle] = useSelection();
-  //console.log(itemState.data)
+    const [selected, setSelected] = useState([]);
+    
 
     var items = Object.values(itemState.data.items);
-    //console.log(items);
   
     var pathItems = items.filter(item => item.path === state.path);
-  // console.log("pathitems");
-  // console.log(pathItems);
-  // console.log(state);
-  //console.log(pathItems);
    useEffect(() => {
-     //console.log("useEffect happened")
       pathItems = items.filter(item => item.path === state.path);
    }, [state.path])
    
@@ -61,7 +47,8 @@ const ItemList = ({ state,itemState }) => {
         <Button.Group>
           { 
             pathItems.map(item =>
-            (item.type === "folder") ? (<Folder name= {item.name} state={state} />) :  (<Link name= {item.name} url={item.url}/>))
+             (item.type === "folder") ? (<Folder item= {item} state={state} />) :  (<Link item={item} state= { { selected, setSelected } }  /> ))
+            
           }
 
         </Button.Group>

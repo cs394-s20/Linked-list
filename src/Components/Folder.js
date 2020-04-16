@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Folder = ({ name, state }) => {
+const Folder = ({ item, state }) => {
   const classes = useStyles();
 	console.log("Folder");
 
@@ -22,8 +22,8 @@ const Folder = ({ name, state }) => {
                   color="primary"
                   className={classes.button}
                   startIcon={<FolderIcon />}
-                  onClick={ () => state.setPath(state.path + "/" + name) } >
-       { name }
+                  onClick={ () => state.setPath(state.path + "/" + item.name) } >
+       { item.name }
   </Button>)
 
 };

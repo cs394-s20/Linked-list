@@ -12,8 +12,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Link = ({ name, url }) => {
+const Link = ({ item, state }) => {
   const classes = useStyles();
+  const handleSelection = () => {
+    
+
+  };
+
 
   return (
   <Button 
@@ -21,14 +26,15 @@ const Link = ({ name, url }) => {
               color="secondary"
               className={classes.button}
               startIcon={
-                <Button onClick={ () => window.open(url, "_blank") }> 
+                <Button onClick={ () => window.open(item.url, "_blank") }> 
                   <OpenInNewIcon /> 
                 </Button>}
               //onClick={ () => window.open(url, "_blank") }
   >
-    <Checkbox color="default">
+    <Checkbox color="default" 
+      onChange={handleSelection}>
     </Checkbox>
-    { name }
+    { item.name }
   </Button>)
 };
 

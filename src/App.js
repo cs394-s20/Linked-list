@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 //import data from "./data.json"
-import { Section, Title, Button } from 'rbx';
+import { Section, Title } from 'rbx';
 import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
@@ -20,6 +20,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { Button } from '@material-ui/core';
 
 
 
@@ -88,6 +89,9 @@ function App() {
             </Box>
           </Box>
         </Box>
+      </Box>
+      <Box>
+        <Button> Open Link(s) </Button>
       </Box>
     </Box>
   );
