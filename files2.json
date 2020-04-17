@@ -1,0 +1,22 @@
+{
+    "name": "CS 394",
+    "type": "folder",
+    "path": "/home"
+},
+{
+    "name": "Course Website",
+    "type": "file",
+    "path": "/home/CS394/",
+    "link-url": "https://canvas.northwestern.edu"
+},
+{
+    "name": "GitHub Page",
+    "type": "file",
+    "path": "/home/CS394/",
+    "link-url": "https://github.com/orgs/cs394-s20/teams/red"
+},
+{
+    "name": "Zoom Links",
+    "type": "folder",
+    "path": "/home/CS394/"
+}

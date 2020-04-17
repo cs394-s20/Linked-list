@@ -5,24 +5,17 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import  ItemList  from './Components/ItemList'
 //import data from "./data.json"
-import { Section, Title } from 'rbx';
 import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
+import Authentication from './Components/Authentication';
 import 'typeface-roboto';
-import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography, Container } from '@material-ui/core';
-import { grey, blue } from '@material-ui/core/colors';
+import { Box } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 import logo from './logo.png';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import { Button } from '@material-ui/core';
-
-
+import 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
@@ -55,6 +48,8 @@ function App() {
 
   const [data, setData] = useState({items: {}});
 
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     //console.log("running useEffect");
     const handleData = snap => {
@@ -64,7 +59,19 @@ function App() {
     return () => { db.off('value', handleData); };
   }, []);
 
-  return (
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(setUser);
+  }, []);
+
+  if (user == null) {
+    return (
+      <Authentication state={ {user, setUser} } />
+    )}
+  
+  else {
+  return ( 
+    <div>
+      <Authentication state={ {user, setUser} } />
     <Box margin={15} justifyContent="center">
       <Box textAlign="center" justifyContent="center" height="100px">
         <img src={logo} alt="Logo"/>
@@ -94,7 +101,8 @@ function App() {
         <Button> Open Link(s) </Button>
       </Box>
     </Box>
-  );
+    </div>
+  );}
 }
 
 export default App;

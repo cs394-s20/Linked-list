@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Folder = ({ item, state }) => {
   const classes = useStyles();
-	console.log("Folder");
 
   return (<Button variant="contained"
                   color="primary"
