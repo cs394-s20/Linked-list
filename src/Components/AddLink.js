@@ -16,15 +16,18 @@ const closeModal = () => {
 }
 
 const updateJSON = ( { state } ) => {
+  
+  var newItemKey = firebase.database().ref().child('items').push().key;
+
   var item = {
     "name": document.getElementById('linkTitle').value,
     "type": "link",
     "path": state.path,
-    "url": document.getElementById('linkUrl').value
+    "url": document.getElementById('linkUrl').value,
+    "id": newItemKey
   };
   //console.log(state.path);
   // Get a key for a new Post.
-  var newItemKey = firebase.database().ref().child('items').push().key;
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
   firebase.database().ref("items/" + newItemKey).set(item);

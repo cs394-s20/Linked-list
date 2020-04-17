@@ -34,7 +34,6 @@ const chooseItem = (state,item) => {
 const ItemList = ({ state,itemState }) => {
     const [selected, setSelected] = useState([]);
     
-
     var items = Object.values(itemState.data.items);
   
     var pathItems = items.filter(item => item.path === state.path);
