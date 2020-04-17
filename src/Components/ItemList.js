@@ -32,7 +32,7 @@ const chooseItem = (state,item) => {
 
 
 const ItemList = ({ state,itemState }) => {
-    const [selected, setSelected] = useState([]);
+    const [selected, setSelected] = useState({ selectedItems: []});
     
     var items = Object.values(itemState.data.items);
   

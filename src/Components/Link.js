@@ -18,21 +18,22 @@ const Link = ({ item, state }) => {
   const handleSelection = () => {
     var found = false;
     var id;
-    for (id of state.selected) {
+    for (id of state.selected.selectedItems) {
       if (id == item.id) {
-        console.log("FOUND");
         found = true;
         //remove object from selected
-        state.setSelected(state.selected.filter(id => id != item.id));
+        var filterArr = [];
+        if (state.selected.selectedItems.length != 1) {
+          filterArr = state.selected.selectedItems.filter(id => id != item.id);
+        }
+        state.setSelected({ selectedItems : filterArr});
         break;
       }
     }
     if (!found) {
-        console.log("NOT FOUND");
-        console.log("THIS IS THE SELECTED ARRAY");
-        console.log(state.selected);
-        state.setSelected(state.selected.push(item.name));
-        console.log(state.selected);
+        var newArr = state.selected.selectedItems
+        newArr.push(item.id);
+        state.setSelected({ selectedItems : newArr});
     }
     
   };
