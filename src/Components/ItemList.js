@@ -31,8 +31,8 @@ const chooseItem = (state,item) => {
 
 
 
-const ItemList = ({ state,itemState }) => {
-    const [selected, setSelected] = useState({ selectedItems: []});
+const ItemList = ({ state, itemState, selectedState }) => {
+    
     
     var items = Object.values(itemState.data.items);
   
@@ -46,7 +46,7 @@ const ItemList = ({ state,itemState }) => {
         <Button.Group>
           { 
             pathItems.map(item =>
-             (item.type === "folder") ? (<Folder item= {item} state={state} />) :  (<Link item={item} state= { { selected, setSelected } }  /> ))
+             (item.type === "folder") ? (<Folder item= {item} state={state} />) :  (<Link item={item} state= { selectedState } /> ))
             
           }
 

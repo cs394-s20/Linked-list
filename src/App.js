@@ -9,6 +9,7 @@ import { Section, Title } from 'rbx';
 import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
+import OpenLinksButton from './Components/OpenLinksButton';
 import 'typeface-roboto';
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,6 +56,8 @@ function App() {
 
   const [data, setData] = useState({items: {}});
 
+  const [selected, setSelected] = useState({ selectedItems: []});
+
   useEffect(() => {
     //console.log("running useEffect");
     const handleData = snap => {
@@ -82,7 +85,7 @@ function App() {
           borderRadius={10} height="600%" padding={1}
           bgcolor={ box_color}
           >
-            <ItemList state = { {path, setPath} } itemState = { { data, setData } }/>
+            <ItemList state = { {path, setPath} } itemState = { { data, setData } } selectedState={ { selected, setSelected } }/>
             <Box>
               <AddLink state = { {path, setPath} } />
               <AddFolder state = { {path, setPath} } />
@@ -91,7 +94,7 @@ function App() {
         </Box>
       </Box>
       <Box>
-        <Button> Open Link(s) </Button>
+        <OpenLinksButton state={ {selected, setSelected} }/>
       </Box>
     </Box>
   );

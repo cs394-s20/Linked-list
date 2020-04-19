@@ -18,6 +18,7 @@ const Link = ({ item, state }) => {
   const handleSelection = () => {
     var found = false;
     var id;
+    //console.log(state.selected);
     for (id of state.selected.selectedItems) {
       if (id == item.id) {
         found = true;
