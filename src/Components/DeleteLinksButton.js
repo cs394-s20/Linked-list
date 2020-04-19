@@ -8,7 +8,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const DeleteLinksButton = ({ state }) => {
+const DeleteLinksButton = ({ state, itemState }) => {
 
   const deleteLinks = () => {
     var id;

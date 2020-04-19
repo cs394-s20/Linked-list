@@ -8,29 +8,54 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const OpenLinksButton = ({ state }) => {
+const OpenLinksButton = ({ state, itemState }) => {
+  const openLinks = (itemRef) => {
+    itemRef.child("url").once("value").then(function(snapshot) {
+      var url = snapshot.val() || 'no url found';
+      if (url != 'no url found')
+      {
+        window.open(url, "_blank");
+        console.log("window opened");
+      }
+    }); 
+  }
 
-  const openLinks = () => {
+  const handleLinks = () => {
     var id;
     for(id of state.selected.selectedItems)
     {
       var itemRef = firebase.database().ref("items/" + id);
+      var itemType = itemRef.child("type").once("value").then(function(snapshot) {
+         return snapshot.val() || 'no type found';
+      });
 
-      itemRef.child("url").once("value").then(function(snapshot) {
-        var url = snapshot.val() || 'no url found';
-        if (url != 'no url found')
-        {
-          window.open(url, "_blank");
-          console.log("window opened");
+      if (itemType == "link") {
+        openLinks(itemRef);
+      }
+      else {
+        //get everything that starts with folder pathname
+        var folderPath = itemRef.child("path").once("value").then(function(snapshot) {
+           return snapshot.val() || 'no path found';
+        });
+        var folderName = itemRef.child("name").once("value").then(function(snapshot) {
+           return snapshot.val() || 'no name found';
+        });
+
+        var items = Object.values(itemState.data.items);
+        var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
+        for(var item of currItems) {
+          if (item.type == "link") {
+            openLinks(itemRef);
+          }
         }
-      });    
+      }   
     }
   }
 
   return (
   <Button 
               
-    onClick={ openLinks }
+    onClick={ handleLinks }
   >
     Open Links
   </Button>)
