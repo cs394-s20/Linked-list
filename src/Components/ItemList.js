@@ -3,6 +3,7 @@ import 'rbx/index.css';
 import { Button } from 'rbx';
 import  Folder from './Folder';
 import  Link from './Link';
+import firebase from 'firebase/app';
 
 const classes = ["CS 394", "COMP_LIT 202", "PSYCH 221", "CS 212"];
 
@@ -31,16 +32,25 @@ const chooseItem = (state,item) => {
 
 
 
-const ItemList = ({ state,itemState }) => {
+const ItemList = ({ state,itemState, userState }) => {
     const [selected, setSelected] = useState([]);
-    
 
-    var items = Object.values(itemState.data.items);
+    console.log("itemState");
+    console.log(itemState)
+
+    var items = Object.values(itemState.data);
   
     var pathItems = items.filter(item => item.path === state.path);
    useEffect(() => {
       pathItems = items.filter(item => item.path === state.path);
    }, [state.path])
+    
+   //  var items = Object.values(itemState.data.items);
+  
+   //  var pathItems = items.filter(item => item.path === state.path);
+   // useEffect(() => {
+   //    pathItems = items.filter(item => item.path === state.path);
+   // }, [state.path])
    
     return (
       <React.Fragment>

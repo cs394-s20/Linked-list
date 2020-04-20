@@ -14,7 +14,7 @@ const closeModal = () => {
   document.getElementById("add-link").style.display="block";
 }
 
-const updateJSON = ( { state } ) => {
+const updateJSON = ( { state, userState } ) => {
   var item = {
     "name": document.getElementById('folderTitle').value,
     "type": "folder",
@@ -22,16 +22,17 @@ const updateJSON = ( { state } ) => {
   };
   //console.log(state.path);
   // Get a key for a new Post.
-  var newItemKey = firebase.database().ref().child('items').push().key;
+  const userUID = userState.user.uid;
+  var newItemKey = firebase.database().ref("users").child(userUID).push().key;
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
-  firebase.database().ref("items/" + newItemKey).set(item);
+  firebase.database().ref("users/" + userUID + "/" + newItemKey).set(item);
   closeModal();
   document.getElementById('folderTitle').value = "";
   return;
 }
 
-const OpenModal = ( { state }) => {
+const OpenModal = ( { state, userState }) => {
 //console.log(state.path);
   return (
     <div style={{color: "white !important"}}>
@@ -46,14 +47,14 @@ const OpenModal = ( { state }) => {
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="danger" onClick = { () => updateJSON({state})}>Create Folder</Button>
+            <Button color="danger" onClick = { () => updateJSON({state, userState})}>Create Folder</Button>
           </Button.Group>
     </div>
 
   )
 };
 
-const AddFolder = ( { state } ) => {
+const AddFolder = ( { state, userState } ) => {
   //console.log(state);
   const openForm = () => {
     document.getElementById("folderModal").style.display="block";
@@ -64,7 +65,7 @@ const AddFolder = ( { state } ) => {
   return (
     <Container>
       <div id="folderModal" style={{ display: "None" }}>
-        <OpenModal state={ state } ></OpenModal>
+        <OpenModal state={ state } userState= { userState }></OpenModal>
       </div>
       <Fab color="danger" id="add-folder" onClick = { () =>  openForm()} >
         <CreateNewFolderIcon/>

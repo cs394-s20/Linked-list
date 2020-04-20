@@ -17,7 +17,6 @@ const uiConfig = {
   };
   
   const Welcome = ({ user }) => {
-      console.log("in welcome")
     return(
     <Message color="grey">
       <Message.Header>
@@ -30,7 +29,6 @@ const uiConfig = {
   );}
   
   const SignIn = () => {
-    console.log("at sign in page")
     return (
     <Box textAlign="center" justifyContent="center" height="100px">
     <img src={logo} alt="Logo"/>
@@ -43,7 +41,6 @@ const uiConfig = {
 
   const Authentication = ({state}) => {
 
-    console.log(state.user)
     return (
     <React.Fragment>
       { state.user ? <Welcome user={ state.user } /> : <SignIn /> }

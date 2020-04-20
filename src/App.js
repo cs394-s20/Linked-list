@@ -46,21 +46,30 @@ function App() {
 
   const [path, setPath] = useState('/home');
 
-  const [data, setData] = useState({items: {}});
+  const [data, setData] = useState({});
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     //console.log("running useEffect");
     const handleData = snap => {
-      if (snap.val()) setData(snap.val());
-    }
+
+      console.log(user);
+      if(user != null){
+        if (snap.val()){ 
+          console.log("snapval");
+          console.log(snap.val());
+          const uid = user.uid;
+          setData(snap.val().users[uid]);
+      }
+    }}
     db.on('value', handleData, error => alert(error));
     return () => { db.off('value', handleData); };
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(setUser);
+
   }, []);
 
   if (user == null) {
@@ -69,6 +78,9 @@ function App() {
     )}
   
   else {
+
+    console.log(data);
+
   return ( 
     <div>
       <Authentication state={ {user, setUser} } />
@@ -89,10 +101,10 @@ function App() {
           borderRadius={10} height="600%" padding={1}
           bgcolor={ box_color}
           >
-            <ItemList state = { {path, setPath} } itemState = { { data, setData } }/>
+            <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} }/>
             <Box>
-              <AddLink state = { {path, setPath} } />
-              <AddFolder state = { {path, setPath} } />
+              <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
+              <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
             </Box>
           </Box>
         </Box>
