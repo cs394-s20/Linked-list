@@ -16,14 +16,16 @@ const OpenLinksButton = ({ state, itemState }) => {
       {
         window.open(url, "_blank");
         console.log("window opened");
+        console.log(url);
       }
     }); 
   }
 
   const handleLinks = () => {
     var id;
-    for(id of state.selected.selectedItems)
-    {
+    for(id of state.selected.selectedItems) {
+      console.log("Hi im here");
+      console.log(id);
       var itemRef = firebase.database().ref("items/" + id);
       itemRef.child("type").once("value").then(function(snapshot) {
         var itemType = snapshot.val() || 'no type found';
@@ -31,8 +33,7 @@ const OpenLinksButton = ({ state, itemState }) => {
         if (itemType == "link") {
           openLinks(itemRef);
           
-        }
-        else {
+        } else {
           //get everything that starts with folder pathname
           itemRef.child("path").once("value").then(function(snapshot) {
             var folderPath = snapshot.val() || 'no path found';

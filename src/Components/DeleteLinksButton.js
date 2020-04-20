@@ -12,20 +12,44 @@ const DeleteLinksButton = ({ state, itemState }) => {
 
   const deleteLinks = () => {
     var id;
-    for(id of state.selected.selectedItems)
-    {
+    for(id of state.selected.selectedItems) {
       console.log(id);
       var itemRef = firebase.database().ref("items/" + id);
-      console.log(itemRef)
-      itemRef.remove();    
+      itemRef.child("type").once("value").then(function(snapshot) {
+        var itemType = snapshot.val() || 'no type found';
+
+        if (itemType == "link") {
+          itemRef.remove();
+          
+        } else {
+          //get everything that starts with folder pathname
+          itemRef.child("path").once("value").then(function(snapshot) {
+            var folderPath = snapshot.val() || 'no path found';
+
+            itemRef.child("name").once("value").then(function(snapshot) {
+              var folderName = snapshot.val() || 'no name found';
+              var items = Object.values(itemState.data.items);
+              var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
+              //NOTE! when we delete, we also need to include the current folder
+              for(var item of currItems) {
+                var currItemRef = firebase.database().ref("items/" + item.id);
+                currItemRef.remove();
+              }
+              var currFolder = items.filter(item => item.name == folderName);
+              for (var fold of currFolder) {
+                var currFolderRef = firebase.database().ref("items/" + fold.id);
+                currFolderRef.remove();
+              }
+              
+            });
+          });
+        } 
+      })
     }
   }
 
   return (
-  <Button 
-              
-    onClick={ deleteLinks }
-  >
+  <Button onClick={ deleteLinks }>
     Delete Links
   </Button>)
 };
