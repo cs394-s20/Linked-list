@@ -39,6 +39,7 @@ const ItemList = ({ state, itemState, selectedState }) => {
     var pathItems = items.filter(item => item.path === state.path);
    useEffect(() => {
       pathItems = items.filter(item => item.path === state.path);
+      selectedState.setSelected({ selectedItems: []});
    }, [state.path])
    
     return (

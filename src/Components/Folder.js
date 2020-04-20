@@ -48,7 +48,7 @@ const Folder = ({ item, state, selectedState }) => {
                   <Button onClick={ () => state.setPath(state.path + "/" + item.name) }>
                     <FolderIcon />
                   </Button>}>
-       <Checkbox color="default" 
+       <Checkbox color="default" checked={false}
           onChange={handleSelection}>
        </Checkbox>
        { item.name }
