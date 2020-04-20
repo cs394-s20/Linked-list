@@ -25,30 +25,35 @@ const OpenLinksButton = ({ state, itemState }) => {
     for(id of state.selected.selectedItems)
     {
       var itemRef = firebase.database().ref("items/" + id);
-      var itemType = itemRef.child("type").once("value").then(function(snapshot) {
-         return snapshot.val() || 'no type found';
-      });
+      itemRef.child("type").once("value").then(function(snapshot) {
+        var itemType = snapshot.val() || 'no type found';
 
-      if (itemType == "link") {
-        openLinks(itemRef);
-      }
-      else {
-        //get everything that starts with folder pathname
-        var folderPath = itemRef.child("path").once("value").then(function(snapshot) {
-           return snapshot.val() || 'no path found';
-        });
-        var folderName = itemRef.child("name").once("value").then(function(snapshot) {
-           return snapshot.val() || 'no name found';
-        });
-
-        var items = Object.values(itemState.data.items);
-        var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
-        for(var item of currItems) {
-          if (item.type == "link") {
-            openLinks(itemRef);
-          }
+        if (itemType == "link") {
+          openLinks(itemRef);
+          
         }
-      }   
+        else {
+          //get everything that starts with folder pathname
+          itemRef.child("path").once("value").then(function(snapshot) {
+            var folderPath = snapshot.val() || 'no path found';
+
+            itemRef.child("name").once("value").then(function(snapshot) {
+              var folderName = snapshot.val() || 'no name found';
+
+              var items = Object.values(itemState.data.items);
+              var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
+              //NOTE! when we delete, we also need to include the current folder
+              for(var item of currItems) {
+                if (item.type == "link") {
+                  console.log("opening a link inside of a folder");
+                  var currItemRef = firebase.database().ref("items/" + item.id);
+                  openLinks(currItemRef);
+                }
+              }
+            });
+          });
+        } 
+      });  
     }
   }
 
