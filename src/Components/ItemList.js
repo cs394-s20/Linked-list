@@ -38,10 +38,19 @@ const ItemList = ({ state,itemState, userState }) => {
     console.log("itemState");
     console.log(itemState)
 
-    var items = Object.values(itemState.data);
+    var items = [];
+    var pathItems = [];
+
+    if(itemState.data){
+
+    items = Object.values(itemState.data);
   
-    var pathItems = items.filter(item => item.path === state.path);
-   useEffect(() => {
+    pathItems = items.filter(item => item.path === state.path);
+   
+
+    }
+
+    useEffect(() => {
       pathItems = items.filter(item => item.path === state.path);
    }, [state.path])
     
