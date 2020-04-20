@@ -35,9 +35,6 @@ const chooseItem = (state,item) => {
 const ItemList = ({ state,itemState, userState }) => {
     const [selected, setSelected] = useState([]);
 
-    console.log("itemState");
-    console.log(itemState)
-
     var items = [];
     var pathItems = [];
 
@@ -46,7 +43,6 @@ const ItemList = ({ state,itemState, userState }) => {
     items = Object.values(itemState.data);
   
     pathItems = items.filter(item => item.path === state.path);
-   
 
     }
 
@@ -54,12 +50,6 @@ const ItemList = ({ state,itemState, userState }) => {
       pathItems = items.filter(item => item.path === state.path);
    }, [state.path])
     
-   //  var items = Object.values(itemState.data.items);
-  
-   //  var pathItems = items.filter(item => item.path === state.path);
-   // useEffect(() => {
-   //    pathItems = items.filter(item => item.path === state.path);
-   // }, [state.path])
    
     return (
       <React.Fragment>

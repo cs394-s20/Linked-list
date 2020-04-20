@@ -54,11 +54,8 @@ function App() {
     //console.log("running useEffect");
     const handleData = snap => {
 
-      console.log(user);
       if(user != null){
         if (snap.val()){ 
-          console.log("snapval");
-          console.log(snap.val());
           const uid = user.uid;
           setData(snap.val().users[uid]);
       }
@@ -78,8 +75,6 @@ function App() {
     )}
   
   else {
-
-    console.log(data);
 
   return ( 
     <div>
