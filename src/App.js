@@ -10,6 +10,7 @@ import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
 import OpenLinksButton from './Components/OpenLinksButton';
+import DeleteLinksButton from './Components/DeleteLinksButton';
 import 'typeface-roboto';
 import Fab from '@material-ui/core/Fab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -94,7 +95,8 @@ function App() {
         </Box>
       </Box>
       <Box>
-        <OpenLinksButton state={ {selected, setSelected} }/>
+        <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
+        <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
       </Box>
     </Box>
   );
