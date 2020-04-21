@@ -15,10 +15,17 @@ const closeModal = () => {
   document.getElementById("add-folder").style.display="block";
 }
 
-const updateJSON = ( { state } ) => {
+const updateJSON = ( { state, userState } ) => {
   
-  var newItemKey = firebase.database().ref().child('items').push().key;
+  //might break 
+  //var newItemKey = firebase.database().ref().child('items').push().key;
 
+  //console.log(state.path);
+  // Get a key for a new Post.
+  
+  const userUID = userState.user.uid;
+  var newItemKey = firebase.database().ref("users").child(userUID).push().key;
+  
   var item = {
     "name": document.getElementById('linkTitle').value,
     "type": "link",
@@ -26,18 +33,16 @@ const updateJSON = ( { state } ) => {
     "url": document.getElementById('linkUrl').value,
     "id": newItemKey
   };
-  //console.log(state.path);
-  // Get a key for a new Post.
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
-  firebase.database().ref("items/" + newItemKey).set(item);
+  firebase.database().ref("users/" + userUID + "/" + newItemKey).set(item);
   closeModal();
   document.getElementById('linkTitle').value = "";
   document.getElementById('linkUrl').value = "";
   return;
 }
 
-const OpenModal = ( { state }) => {
+const OpenModal = ( { state, userState }) => {
 //console.log(state.path);
   return (
     <div style={{color: "white !important"}}>
@@ -58,14 +63,14 @@ const OpenModal = ( { state }) => {
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="link" onClick = { () => updateJSON({state})}>Add Link</Button>
+            <Button color="link" onClick = { () => updateJSON({state, userState})}>Add Link</Button>
           </Button.Group>
     </div>
 
   )
 };
 
-const AddLink = ( { state } ) => {
+const AddLink = ( { state, userState } ) => {
   //console.log(state);
   const openForm = () => {
     document.getElementById("openModal").style.display="block";
@@ -76,7 +81,7 @@ const AddLink = ( { state } ) => {
   return (
     <Container >
       <div id="openModal" style={{ display: "None" }}>
-        <OpenModal state={ state } ></OpenModal>
+        <OpenModal state={ state } userState= { userState } ></OpenModal>
       </div>
       <Fab color="link" id="add-link" onClick = { () =>  openForm()} >
         <AddIcon />
