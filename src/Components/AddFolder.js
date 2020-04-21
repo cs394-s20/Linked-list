@@ -15,15 +15,22 @@ const closeModal = () => {
 }
 
 const updateJSON = ( { state, userState } ) => {
-  var item = {
-    "name": document.getElementById('folderTitle').value,
-    "type": "folder",
-    "path": state.path,
-  };
+  // Get a key for a new Post.
+  
+  // this might break things - decide which newItem key to use
+  //var newItemKey = firebase.database().ref().child('items').push().key;
+  
   //console.log(state.path);
   // Get a key for a new Post.
   const userUID = userState.user.uid;
   var newItemKey = firebase.database().ref("users").child(userUID).push().key;
+  
+  var item = {
+    "name": document.getElementById('folderTitle').value,
+    "type": "folder",
+    "path": state.path,
+    "id": newItemKey
+  };
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
   firebase.database().ref("users/" + userUID + "/" + newItemKey).set(item);

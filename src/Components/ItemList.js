@@ -32,7 +32,7 @@ const chooseItem = (state,item) => {
 
 
 
-const ItemList = ({ state,itemState, userState }) => {
+const ItemList = ({ state,itemState, userState, selectedState }) => {
     const [selected, setSelected] = useState([]);
 
     var items = [];
@@ -41,13 +41,17 @@ const ItemList = ({ state,itemState, userState }) => {
     if(itemState.data){
 
     items = Object.values(itemState.data);
-  
+    
+    // this might break things - fix which items var we use 
+    // var items = Object.values(itemState.data.items);
+      
     pathItems = items.filter(item => item.path === state.path);
 
     }
 
     useEffect(() => {
       pathItems = items.filter(item => item.path === state.path);
+      selectedState.setSelected({ selectedItems: []});
    }, [state.path])
     
    
@@ -56,7 +60,7 @@ const ItemList = ({ state,itemState, userState }) => {
         <Button.Group>
           { 
             pathItems.map(item =>
-             (item.type === "folder") ? (<Folder item= {item} state={state} />) :  (<Link item={item} state= { { selected, setSelected } }  /> ))
+             (item.type === "folder") ? (<Folder item= {item} state={state} selectedState = {selectedState} />) :  (<Link item={item} state= { selectedState } /> ))
             
           }
 

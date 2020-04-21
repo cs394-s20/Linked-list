@@ -14,9 +14,29 @@ const useStyles = makeStyles((theme) => ({
 
 const Link = ({ item, state }) => {
   const classes = useStyles();
-  const handleSelection = () => {
-    
 
+  const handleSelection = () => {
+    var found = false;
+    var id;
+    console.log(state.selected);
+    for (id of state.selected.selectedItems) {
+      if (id == item.id) {
+        found = true;
+        //remove object from selected
+        var filterArr = [];
+        if (state.selected.selectedItems.length != 1) {
+          filterArr = state.selected.selectedItems.filter(id => id != item.id);
+        }
+        state.setSelected({ selectedItems : filterArr});
+        break;
+      }
+    }
+    if (!found) {
+        var newArr = state.selected.selectedItems
+        newArr.push(item.id);
+        state.setSelected({ selectedItems : newArr});
+    }
+    
   };
 
 

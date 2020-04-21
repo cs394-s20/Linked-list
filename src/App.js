@@ -9,6 +9,8 @@ import AddLink from './Components/AddLink';
 import BackButton from './Components/BackButton';
 import AddFolder from './Components/AddFolder';
 import Authentication from './Components/Authentication';
+import OpenLinksButton from './Components/OpenLinksButton';
+import DeleteLinksButton from './Components/DeleteLinksButton';
 import 'typeface-roboto';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
@@ -49,6 +51,8 @@ function App() {
   const [data, setData] = useState({});
 
   const [user, setUser] = useState(null);
+
+  const [selected, setSelected] = useState({ selectedItems: []});
 
   useEffect(() => {
     //console.log("running useEffect");
@@ -96,7 +100,7 @@ function App() {
           borderRadius={10} height="600%" padding={1}
           bgcolor={ box_color}
           >
-            <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} }/>
+            <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} } selectedState={ { selected, setSelected } }/>
             <Box>
               <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
               <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
@@ -105,7 +109,8 @@ function App() {
         </Box>
       </Box>
       <Box>
-        <Button> Open Link(s) </Button>
+        <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
+        <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
       </Box>
     </Box>
     </div>
