@@ -8,7 +8,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const OpenLinksButton = ({ state, itemState }) => {
+const OpenLinksButton = ({ state, itemState, userState }) => {
   const openLinks = (itemRef) => {
     itemRef.child("url").once("value").then(function(snapshot) {
       var url = snapshot.val() || 'no url found';
@@ -26,7 +26,7 @@ const OpenLinksButton = ({ state, itemState }) => {
     for(id of state.selected.selectedItems) {
       console.log("Hi im here");
       console.log(id);
-      var itemRef = firebase.database().ref("items/" + id);
+      var itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
       itemRef.child("type").once("value").then(function(snapshot) {
         var itemType = snapshot.val() || 'no type found';
 
@@ -41,13 +41,13 @@ const OpenLinksButton = ({ state, itemState }) => {
             itemRef.child("name").once("value").then(function(snapshot) {
               var folderName = snapshot.val() || 'no name found';
 
-              var items = Object.values(itemState.data.items);
+              var items = Object.values(itemState.data);
               var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
               //NOTE! when we delete, we also need to include the current folder
               for(var item of currItems) {
                 if (item.type == "link") {
                   console.log("opening a link inside of a folder");
-                  var currItemRef = firebase.database().ref("items/" + item.id);
+                  var currItemRef = firebase.database().ref("users/" + userState.user.uid + "/" + item.id);
                   openLinks(currItemRef);
                 }
               }

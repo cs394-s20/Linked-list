@@ -8,13 +8,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const DeleteLinksButton = ({ state, itemState }) => {
+const DeleteLinksButton = ({ state, itemState, userState }) => {
 
   const deleteLinks = () => {
     var id;
     for(id of state.selected.selectedItems) {
       console.log(id);
-      var itemRef = firebase.database().ref("items/" + id);
+      var itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
       itemRef.child("type").once("value").then(function(snapshot) {
         var itemType = snapshot.val() || 'no type found';
 
@@ -28,16 +28,16 @@ const DeleteLinksButton = ({ state, itemState }) => {
 
             itemRef.child("name").once("value").then(function(snapshot) {
               var folderName = snapshot.val() || 'no name found';
-              var items = Object.values(itemState.data.items);
+              var items = Object.values(itemState.data);
               var currItems = items.filter(item => item.path.includes(folderPath + "/" + folderName));
               //NOTE! when we delete, we also need to include the current folder
               for(var item of currItems) {
-                var currItemRef = firebase.database().ref("items/" + item.id);
+                var currItemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
                 currItemRef.remove();
               }
               var currFolder = items.filter(item => item.name == folderName);
               for (var fold of currFolder) {
-                var currFolderRef = firebase.database().ref("items/" + fold.id);
+                var currFolderRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
                 currFolderRef.remove();
               }
               

@@ -109,8 +109,8 @@ function App() {
         </Box>
       </Box>
       <Box>
-        <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
-        <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } }/>
+        <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
+        <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
       </Box>
     </Box>
     </div>

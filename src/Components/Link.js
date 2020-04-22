@@ -33,6 +33,7 @@ const Link = ({ item, state }) => {
     }
     if (!found) {
         var newArr = state.selected.selectedItems
+        console.log(item);
         newArr.push(item.id);
         state.setSelected({ selectedItems : newArr});
     }
