@@ -1,6 +1,6 @@
 import React from 'react';
 import 'rbx/index.css';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Paper, Box } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
@@ -9,6 +9,21 @@ import Checkbox from '@material-ui/core/Checkbox';
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+  },
+  paper: {
+    width: "150px",
+    height: "150px",
+    borderColor: "#F50257",
+    borderWidth: "4px"
+  },
+  name: {
+    display: "block",
+    // position: "relative",
+    // top: "25%",
+    textAlign: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
   },
 }));
 
@@ -42,21 +57,27 @@ const Link = ({ item, state }) => {
 
 
   return (
-  <Button 
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-              startIcon={
-                <Button onClick={ () => window.open(item.url, "_blank") }> 
-                  <OpenInNewIcon /> 
-                </Button>}
-              //onClick={ () => window.open(url, "_blank") }
-  >
+  <Grid item key={item.id}>
+    <Paper elevation={2} 
+           variant="outlined"
+           color="secondary"
+           className={classes.paper}
+                // startIcon={
+                //   <Button onClick={ () => window.open(item.url, "_blank") }> 
+                //     <OpenInNewIcon /> 
+                //   </Button>}
+                // onClick={ () => window.open(url, "_blank") }
+    >
     <Checkbox color="default" 
-      onChange={handleSelection}>
+      onChange={handleSelection}
+      display="block"
+      >
     </Checkbox>
+    <Box className={classes.name}>
     { item.name }
-  </Button>)
+    </Box>
+  </Paper>
+  </Grid>)
 };
 
 export default Link;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react';
 // import 'rbx/index.css';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Paper, Box } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -12,6 +12,13 @@ const folder_color = blue[200];
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+  },
+  paper: {
+    width: "150px",
+    height: "150px",
+    borderColor: "#3F51B5",
+    borderWidth: "4px",
+    backgroundColor: "#3F51B5",
   },
 }));
 
@@ -41,18 +48,24 @@ const Folder = ({ item, state, selectedState }) => {
     }
   }
 
-  return (<Button variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  startIcon={
-                  <Button onClick={ () => state.setPath(state.path + "/" + item.name) }>
-                    <FolderIcon />
-                  </Button>}>
-       <Checkbox color="default"
-          onChange={handleSelection}>
-       </Checkbox>
-       { item.name }
-  </Button>)
+  return (
+  <Grid item key={item.id}>
+    <Paper elevation={3}
+            color="primary"
+            className={classes.paper}
+            onClick={ () => state.setPath(state.path + "/" + item.name) }
+            >
+        <Checkbox color="default"
+            onChange={handleSelection}>
+        </Checkbox>
+        <Box>
+        <Button onClick={ () => state.setPath(state.path + "/" + item.name) }>
+          <FolderIcon />
+        </Button>
+        { item.name }
+        </Box>
+    </Paper>
+  </Grid>)
 
 };
 

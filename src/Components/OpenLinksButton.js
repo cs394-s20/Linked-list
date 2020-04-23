@@ -8,7 +8,28 @@ import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+const useStyles = makeStyles((theme) => ({
+  openbutton: {
+    border: "solid",
+    borderWidth: "1px"
+  },
+}));
+
+const empty = (selected_len) => {
+  if (selected_len > 0){
+    return (
+      false
+    )
+  }
+  else{
+    return (
+      true
+    )
+  }
+}
+
 const OpenLinksButton = ({ state, itemState, userState }) => {
+  const classes = useStyles();
   const openLinks = (itemRef) => {
     itemRef.child("url").once("value").then(function(snapshot) {
       var url = snapshot.val() || 'no url found';
@@ -60,7 +81,8 @@ const OpenLinksButton = ({ state, itemState, userState }) => {
 
   return (
   <Button 
-              
+    disabled = {empty(state.selected.selectedItems.length)}
+    className={classes.openbutton}      
     onClick={ handleLinks }
   >
     Open Links
