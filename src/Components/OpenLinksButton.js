@@ -23,9 +23,10 @@ const OpenLinksButton = ({ state, itemState, userState }) => {
 
   const handleLinks = () => {
     var id;
+    console.log(state.selected.selectedItems)
     for(id of state.selected.selectedItems) {
-      console.log("Hi im here");
-      console.log(id);
+      //console.log("Hi im here");
+      //console.log(id);
       var itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
       itemRef.child("type").once("value").then(function(snapshot) {
         var itemType = snapshot.val() || 'no type found';
