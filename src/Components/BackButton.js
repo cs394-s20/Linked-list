@@ -16,13 +16,14 @@ const newPath = path => {
 const BackButton = ({ name, state }) => {
     
     
-  return (<Fab
+  return (
+  <Button
         display="inline"
         aria-label="add"
         onClick={ () => state.setPath(newPath(state.path))} 
         disabled = { atHome(state.path) } >
         <KeyboardBackspaceIcon />
-  </Fab>)
+  </Button>)
 
 };
 

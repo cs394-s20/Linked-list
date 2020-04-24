@@ -38,22 +38,26 @@ const Link = ({ item, state }) => {
         state.setSelected({ selectedItems : filterArr});
     }
     else {
+        console.log("id is undefined")
         var newArr = state.selected.selectedItems
         newArr.push(item.id);
         state.setSelected({ selectedItems : newArr});
+        console.log(newArr)
+        console.log(state.selected.selectedItems)
     }
     console.log(state.selected.selectedItems);
   }
 
-    const inSelected = () => {
-      var id;
-      for (id of state.selected.selectedItems) {
-        if (id == item.id) {
-          return id;
-        }
+  const inSelected = () => {
+    var id;
+    console.log(state.selected.selectedItems)
+    for (id of state.selected.selectedItems) {
+      if (id == item.id) {
+        return id;
       }
-      return undefined;
     }
+    return undefined;
+  }
 
   return (
   <Grid item key={item.id}>
@@ -69,8 +73,9 @@ const Link = ({ item, state }) => {
     >
     <Checkbox color="default" 
       display="block"
+      onChange={handleSelection}
       checked = {inSelected() != undefined}
-      onChange={handleSelection}>
+      >
     </Checkbox>
     <Box className={classes.name}>
     { item.name }
