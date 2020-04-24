@@ -48,7 +48,7 @@ const ItemList = ({ state,itemState, userState, selectedState }) => {
     
    
     return (
-      <Grid container justify="center" spacing="2">
+      <Grid container justify="center" spacing={2}>
         { 
           pathItems.map(item =>
             (item.type === "folder") ? 

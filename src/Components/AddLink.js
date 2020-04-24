@@ -5,7 +5,6 @@ import 'firebase/database';
 import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
-import { Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 
