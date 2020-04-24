@@ -74,9 +74,9 @@ const AddFolder = ( { state, userState } ) => {
       <div id="folderModal" style={{ display: "None" }}>
         <OpenModal state={ state } userState= { userState }></OpenModal>
       </div>
-      <Fab color="danger" id="add-folder" onClick = { () =>  openForm()} >
+      <Button id="add-folder" onClick = { () =>  openForm()} >
         <CreateNewFolderIcon/>
-      </Fab>
+      </Button>
     </Container>
   )
 

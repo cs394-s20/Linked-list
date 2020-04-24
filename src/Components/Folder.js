@@ -15,11 +15,28 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "150px",
-    height: "150px",
-    borderColor: "#3F51B5",
-    borderWidth: "4px",
-    backgroundColor: "#3F51B5",
+    height: "120px",
+    backgroundColor: "#bbdefb",
+    borderTopLeftRadius: "0px"
   },
+  topleftbox: {
+    width: "80px",
+    height: "30px",
+    backgroundColor: "#bbdefb",
+    position: "relative",
+    top: "0px",
+    right: "0px",
+    borderTopRightRadius: "3px",
+    borderTopLeftRadius: "3px",
+  },
+  name: {
+    display: "block",
+    textAlign: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
+    paddingTop: "15px"
+  }
 }));
 
 const Folder = ({ item, state, selectedState }) => {
@@ -50,21 +67,26 @@ const Folder = ({ item, state, selectedState }) => {
 
   return (
   <Grid item key={item.id}>
-    <Paper elevation={3}
-            color="primary"
-            className={classes.paper}
-            onClick={ () => state.setPath(state.path + "/" + item.name) }
-            >
+    <Box>
+    <Paper
+      elevation={0}
+      className={classes.topleftbox}
+      square 
+      >
         <Checkbox color="default"
             onChange={handleSelection}>
         </Checkbox>
-        <Box>
-        <Button onClick={ () => state.setPath(state.path + "/" + item.name) }>
-          <FolderIcon />
-        </Button>
+      </Paper>
+    <Paper 
+      elevation={0}
+      className={classes.paper}
+      onClick={ () => state.setPath(state.path + "/" + item.name) }
+      >
+        <Box className={classes.name}>
         { item.name }
         </Box>
     </Paper>
+    </Box>
   </Grid>)
 
 };

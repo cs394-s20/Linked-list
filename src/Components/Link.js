@@ -18,8 +18,6 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     display: "block",
-    // position: "relative",
-    // top: "25%",
     textAlign: "center",
     paddingLeft: "10px",
     paddingRight: "10px",
