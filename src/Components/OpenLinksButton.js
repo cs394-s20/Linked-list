@@ -45,21 +45,25 @@ const OpenLinksButton = ({ state, itemState, userState }) => {
   const handleLinks = () => {
     var id;
     for(id of state.selected.selectedItems) {
-      console.log("Hi im here");
-      console.log(id);
       var itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
-      itemRef.child("type").once("value").then(function(snapshot) {
+ 
+      itemRef.child("type").on("value", function(snapshot) {
+        console.log(id);
         var itemType = snapshot.val() || 'no type found';
-
+        //console.log(itemType);
         if (itemType == "link") {
+          
+          //console.log(id);
+          itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
+          console.log(itemRef);
           openLinks(itemRef);
           
         } else {
           //get everything that starts with folder pathname
-          itemRef.child("path").once("value").then(function(snapshot) {
+          itemRef.child("path").on("value", function(snapshot) {
             var folderPath = snapshot.val() || 'no path found';
 
-            itemRef.child("name").once("value").then(function(snapshot) {
+            itemRef.child("name").on("value", function(snapshot) {
               var folderName = snapshot.val() || 'no name found';
 
               var items = Object.values(itemState.data);

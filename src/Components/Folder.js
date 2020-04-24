@@ -43,28 +43,33 @@ const Folder = ({ item, state, selectedState }) => {
   const classes = useStyles();
 
   const handleSelection = () => {
-    var found = false;
-    var id;
-    console.log(selectedState.selected);
-    for (id of selectedState.selected.selectedItems) {
-      if (id == item.id) {
-        found = true;
+    var id = inSelected()
+    if (id != undefined) {
         //remove object from selected
         var filterArr = [];
         if (selectedState.selected.selectedItems.length != 1) {
           filterArr = selectedState.selected.selectedItems.filter(id => id != item.id);
         }
         selectedState.setSelected({ selectedItems : filterArr});
-        break;
-      }
     }
-    if (!found) {
+    else {
         var newArr = selectedState.selected.selectedItems
         newArr.push(item.id);
         selectedState.setSelected({ selectedItems : newArr});
     }
+    
   }
 
+  const inSelected = () => {
+      var id;
+      for (id of selectedState.selected.selectedItems) {
+        if (id == item.id) {
+          return id;
+        }
+      }
+      return undefined;
+    }
+  
   return (
   <Grid item key={item.id}>
     <Box>
@@ -74,6 +79,7 @@ const Folder = ({ item, state, selectedState }) => {
       square 
       >
         <Checkbox color="default"
+            checked = {inSelected() != undefined}
             onChange={handleSelection}>
         </Checkbox>
       </Paper>
@@ -88,6 +94,29 @@ const Folder = ({ item, state, selectedState }) => {
     </Paper>
     </Box>
   </Grid>)
+
+// const handleSelection = () => {
+  //   var found = false;
+  //   var id;
+  //   console.log(selectedState.selected);
+  //   for (id of selectedState.selected.selectedItems) {
+  //     if (id == item.id) {
+  //       found = true;
+  //       //remove object from selected
+  //       var filterArr = [];
+  //       if (selectedState.selected.selectedItems.length != 1) {
+  //         filterArr = selectedState.selected.selectedItems.filter(id => id != item.id);
+  //       }
+  //       selectedState.setSelected({ selectedItems : filterArr});
+  //       break;
+  //     }
+  //   }
+  //   if (!found) {
+  //       var newArr = selectedState.selected.selectedItems
+  //       newArr.push(item.id);
+  //       selectedState.setSelected({ selectedItems : newArr});
+  //   }
+  // }
 
 };
 

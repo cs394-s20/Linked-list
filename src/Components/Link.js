@@ -27,32 +27,33 @@ const useStyles = makeStyles((theme) => ({
 
 const Link = ({ item, state }) => {
   const classes = useStyles();
-
   const handleSelection = () => {
-    var found = false;
-    var id;
-    console.log(state.selected);
-    for (id of state.selected.selectedItems) {
-      if (id == item.id) {
-        found = true;
+    var id = inSelected()
+    if (id != undefined) {
         //remove object from selected
         var filterArr = [];
         if (state.selected.selectedItems.length != 1) {
           filterArr = state.selected.selectedItems.filter(id => id != item.id);
         }
         state.setSelected({ selectedItems : filterArr});
-        break;
-      }
     }
-    if (!found) {
+    else {
         var newArr = state.selected.selectedItems
-        console.log(item);
         newArr.push(item.id);
         state.setSelected({ selectedItems : newArr});
     }
-    
-  };
+    console.log(state.selected.selectedItems);
+  }
 
+    const inSelected = () => {
+      var id;
+      for (id of state.selected.selectedItems) {
+        if (id == item.id) {
+          return id;
+        }
+      }
+      return undefined;
+    }
 
   return (
   <Grid item key={item.id}>
@@ -67,9 +68,9 @@ const Link = ({ item, state }) => {
                 // onClick={ () => window.open(url, "_blank") }
     >
     <Checkbox color="default" 
-      onChange={handleSelection}
       display="block"
-      >
+      checked = {inSelected() != undefined}
+      onChange={handleSelection}>
     </Checkbox>
     <Box className={classes.name}>
     { item.name }

@@ -57,7 +57,7 @@ const OpenModal = ( { state, userState }) => {
           <Field>
             <Label>Link URL</Label>
             <Control>
-              <Input id="linkUrl" type="text" placeholder="www.google.com" />
+              <Input id="linkUrl" type="text" placeholder="must be full url, ex: https://www.google.com"                />
             </Control>
           </Field>
           </Modal.Content>
