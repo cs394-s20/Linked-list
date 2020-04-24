@@ -13,10 +13,9 @@ import OpenLinksButton from './Components/OpenLinksButton';
 import DeleteLinksButton from './Components/DeleteLinksButton';
 import 'typeface-roboto';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import logo from './logo.png';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Box } from '@material-ui/core';
 import 'firebase/auth';
 
 const firebaseConfig = {
@@ -96,21 +95,29 @@ function App() {
             Current directory: 
             <Box fontSize={24} display="inline" fontColor="grey"> { path } </Box>
           </Box>
-          <Box marginLeft={12} 
-          borderRadius={10} height="600%" padding={1}
+          <Grid container justify="center" spacing='2'>
+            <Grid item key="add-link-button">
+              <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
+            </Grid>
+            <Grid item key="add-folder-button">
+              <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
+            </Grid>
+            <Grid item key="delete-link-button">
+              <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
+            </Grid>
+          </Grid>
+          <Box 
+          marginLeft={12} 
+          borderRadius={10}
+          padding={1}
           bgcolor={ box_color}
           >
             <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} } selectedState={ { selected, setSelected } }/>
-            <Box>
-              <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
-              <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
-            </Box>
           </Box>
         </Box>
       </Box>
       <Box>
         <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
-        <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
       </Box>
     </Box>
     </div>

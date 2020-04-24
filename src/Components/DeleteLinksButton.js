@@ -1,14 +1,23 @@
 import React from 'react';
 import 'rbx/index.css';
-import { Button } from '@material-ui/core';
+import { Button, Fab } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
 import 'firebase/database';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    borderColor: "#F50257",
+    borderWidth: "4px"
+  },
+}));
 
 const DeleteLinksButton = ({ state, itemState, userState }) => {
+  const classes = useStyles();
 
   const deleteLinks = () => {
     var id;
@@ -48,8 +57,8 @@ const DeleteLinksButton = ({ state, itemState, userState }) => {
   }
 
   return (
-  <Button onClick={ deleteLinks }>
-    Delete Links
+  <Button className={classes.button} id="delete-link" onClick={ deleteLinks }>
+    <DeleteIcon/>
   </Button>)
 };
 

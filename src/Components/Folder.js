@@ -1,6 +1,6 @@
 import React, { useState, useEffect }from 'react';
 // import 'rbx/index.css';
-import { Button } from '@material-ui/core';
+import { Button, Grid, Paper, Box } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -13,6 +13,30 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
+  paper: {
+    width: "150px",
+    height: "120px",
+    backgroundColor: "#bbdefb",
+    borderTopLeftRadius: "0px"
+  },
+  topleftbox: {
+    width: "80px",
+    height: "30px",
+    backgroundColor: "#bbdefb",
+    position: "relative",
+    top: "0px",
+    right: "0px",
+    borderTopRightRadius: "3px",
+    borderTopLeftRadius: "3px",
+  },
+  name: {
+    display: "block",
+    textAlign: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
+    paddingTop: "15px"
+  }
 }));
 
 const Folder = ({ item, state, selectedState }) => {
@@ -36,7 +60,42 @@ const Folder = ({ item, state, selectedState }) => {
     
   }
 
-  // const handleSelection = () => {
+  const inSelected = () => {
+      var id;
+      for (id of selectedState.selected.selectedItems) {
+        if (id == item.id) {
+          return id;
+        }
+      }
+      return undefined;
+    }
+  
+  return (
+  <Grid item key={item.id}>
+    <Box>
+    <Paper
+      elevation={0}
+      className={classes.topleftbox}
+      square 
+      >
+        <Checkbox color="default"
+            checked = {inSelected() != undefined}
+            onChange={handleSelection}>
+        </Checkbox>
+      </Paper>
+    <Paper 
+      elevation={0}
+      className={classes.paper}
+      onClick={ () => state.setPath(state.path + "/" + item.name) }
+      >
+        <Box className={classes.name}>
+        { item.name }
+        </Box>
+    </Paper>
+    </Box>
+  </Grid>)
+
+// const handleSelection = () => {
   //   var found = false;
   //   var id;
   //   console.log(selectedState.selected);
@@ -58,30 +117,6 @@ const Folder = ({ item, state, selectedState }) => {
   //       selectedState.setSelected({ selectedItems : newArr});
   //   }
   // }
-
-  const inSelected = () => {
-      var id;
-      for (id of selectedState.selected.selectedItems) {
-        if (id == item.id) {
-          return id;
-        }
-      }
-      return undefined;
-    }
-
-  return (<Button variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  startIcon={
-                  <Button onClick={ () => state.setPath(state.path + "/" + item.name) }>
-                    <FolderIcon />
-                  </Button>}>
-       <Checkbox color="default"
-          checked = {inSelected() != undefined}
-          onChange={handleSelection}>
-       </Checkbox>
-       { item.name }
-  </Button>)
 
 };
 

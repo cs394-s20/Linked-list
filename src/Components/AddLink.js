@@ -83,10 +83,10 @@ const AddLink = ( { state, userState } ) => {
       <div id="openModal" style={{ display: "None" }}>
         <OpenModal state={ state } userState= { userState } ></OpenModal>
       </div>
-      <Fab color="link" id="add-link" onClick = { () =>  openForm()} >
+      <Button id="add-link" onClick = { () =>  openForm()} >
         <AddIcon />
         Link
-      </Fab>
+      </Button>
     </Container>
   )
 
