@@ -11,7 +11,7 @@ import 'firebase/database';
 const useStyles = makeStyles((theme) => ({
   openbutton: {
     border: "solid",
-    borderWidth: "1px"
+    borderWidth: "1px",
   },
 }));
 

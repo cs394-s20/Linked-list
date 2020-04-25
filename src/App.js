@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(10),
     right: theme.spacing(5)
   },
+  openlinksbuttonbox: {
+    textAlign: "center",
+    marginTop: "10px"
+  },
 }));
 
 const box_color = grey[400];
@@ -89,15 +93,8 @@ function App() {
         <img src={logo} alt="Logo"/>
       </Box>
       <Box>
-        <Box component="div" display="inline">
-            <BackButton display="inline" state={ {path, setPath} }/>
-        </Box>
-        <Box display="inline">
-          <Box fontSize={24} fontWeight={1000} display="inline" marginLeft={5}>
-            Current directory: 
-            <Box fontSize={24} display="inline" fontColor="grey"> { path } </Box>
-          </Box>
-          <Grid container justify="center" spacing='2'>
+        <Box marginTop="10px">
+          <Grid container justify="center" spacing={2}>
             <Grid item key="add-link-button">
               <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
             </Grid>
@@ -109,18 +106,25 @@ function App() {
             </Grid>
           </Grid>
           <Box 
-          marginLeft={12} 
           borderRadius={10}
           padding={1}
           bgcolor={ box_color}
           >
-          <DndProvider backend={Backend}>
+                    
+          <Box component="div" marginBottom="10px">
+            <BackButton display="inline" state={ {path, setPath} } marginBottom="10px"/>
+         </Box>
+            <DndProvider backend={Backend}>
             <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} } selectedState={ { selected, setSelected } }/>
-          </DndProvider>
+            </DndProvider>
+          <Box fontSize={16} fontWeight={1000} marginTop="10px">
+            Current directory:
+          <Box fontSize={16} display="inline" fontColor="grey"> { path } </Box>
+          </Box>
           </Box>
         </Box>
       </Box>
-      <Box>
+      <Box className={classes.openlinksbuttonbox}>
         <OpenLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
       </Box>
     </Box>

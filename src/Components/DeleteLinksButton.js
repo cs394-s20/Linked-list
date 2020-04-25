@@ -1,6 +1,6 @@
 import React from 'react';
 import 'rbx/index.css';
-import { Button, Fab } from '@material-ui/core';
+import { Button } from 'rbx';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
@@ -11,8 +11,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    borderColor: "#F50257",
-    borderWidth: "4px"
   },
 }));
 

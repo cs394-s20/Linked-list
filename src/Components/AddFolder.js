@@ -6,7 +6,7 @@ import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
 import { Fab } from '@material-ui/core';
-import CreateNewFolderIcon from '@material-ui/icons/CreateNewFolder';
+import AddIcon from '@material-ui/icons/Add';
 
 const closeModal = () => {
   document.getElementById("folderModal").style.display="none";
@@ -75,7 +75,8 @@ const AddFolder = ( { state, userState } ) => {
         <OpenModal state={ state } userState= { userState }></OpenModal>
       </div>
       <Button id="add-folder" onClick = { () =>  openForm()} >
-        <CreateNewFolderIcon/>
+        <AddIcon />
+          Folder
       </Button>
     </Container>
   )
