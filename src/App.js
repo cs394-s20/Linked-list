@@ -17,6 +17,8 @@ import { grey } from '@material-ui/core/colors';
 import logo from './logo.png';
 import { Button, Grid, Box } from '@material-ui/core';
 import 'firebase/auth';
+import { DndProvider } from 'react-dnd'
+import Backend from 'react-dnd-html5-backend'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHyktJVGIzKbUvJTPGYfO2LOfuTtTYzDM",
@@ -112,7 +114,9 @@ function App() {
           padding={1}
           bgcolor={ box_color}
           >
+          <DndProvider backend={Backend}>
             <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} } selectedState={ { selected, setSelected } }/>
+          </DndProvider>
           </Box>
         </Box>
       </Box>

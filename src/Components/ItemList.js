@@ -53,7 +53,7 @@ const ItemList = ({ state,itemState, userState, selectedState }) => {
           pathItems.map(item =>
             (item.type === "folder") ? 
               (<Folder item= {item} state={state} selectedState = {selectedState} />) :  
-              (<Link item={item} state= { selectedState } /> ))
+              (<Link item={item} state= { selectedState } userState = { userState }/> ))
           
         }
       </Grid>

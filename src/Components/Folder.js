@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import FolderIcon from '@material-ui/icons/Folder';
 import { blue } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
+import ItemTypes from './ItemTypes';
+import { useDrop } from 'react-dnd';
 
 const folder_color = blue[200];
 
@@ -42,6 +44,21 @@ const useStyles = makeStyles((theme) => ({
 const Folder = ({ item, state, selectedState }) => {
   const classes = useStyles();
 
+  const newPath = item.path + "/" + item.name;
+
+  const [, drop] = useDrop({
+	  accept: ItemTypes.BOX,
+	  drop: () => ({
+		name: `${newPath}`,
+      	newPath,
+	}),
+
+	collect: monitor => ({
+		isOver: monitor.isOver(),
+		canDrop: monitor.canDrop(),
+	})
+	})
+
   const handleSelection = () => {
     var id = inSelected()
     if (id != undefined) {
@@ -71,29 +88,31 @@ const Folder = ({ item, state, selectedState }) => {
     }
   
   return (
-  <Grid item key={item.id}>
-    <Box>
-    <Paper
-      elevation={0}
-      className={classes.topleftbox}
-      square 
-      >
-        <Checkbox color="default"
-            checked = {inSelected() != undefined}
-            onChange={handleSelection}>
-        </Checkbox>
-      </Paper>
-    <Paper 
-      elevation={0}
-      className={classes.paper}
-      onClick={ () => state.setPath(state.path + "/" + item.name) }
-      >
-        <Box className={classes.name}>
-        { item.name }
-        </Box>
-    </Paper>
-    </Box>
-  </Grid>)
+  	<div ref={drop}>
+	  <Grid item key={item.id}>
+	    <Box>
+	    <Paper
+	      elevation={0}
+	      className={classes.topleftbox}
+	      square 
+	      >
+	        <Checkbox color="default"
+	            checked = {inSelected() != undefined}
+	            onChange={handleSelection}>
+	        </Checkbox>
+	      </Paper>
+	    <Paper 
+	      elevation={0}
+	      className={classes.paper}
+	      onClick={ () => state.setPath(state.path + "/" + item.name) }
+	      >
+	        <Box className={classes.name}>
+	        { item.name }
+	        </Box>
+	    </Paper>
+	    </Box>
+	  </Grid>
+  </div>)
 
 // const handleSelection = () => {
   //   var found = false;
