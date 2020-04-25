@@ -33,9 +33,6 @@ const changePath = (item, newPath, userState) => {
 
 	const userUID = userState.user.uid;
 
-	console.log(newPath);
-	console.log(item);
-
 	// Write the new post's data simultaneously in the posts list and the user's post list.
 	firebase.database().ref("users/" + userUID + "/" + item.id + "/path").set(newPath);
 
