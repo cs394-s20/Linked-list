@@ -6,6 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import FolderIcon from '@material-ui/icons/Folder';
 import { blue } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
+import ItemTypes from './ItemTypes';
+import { useDrop } from 'react-dnd';
+import { useDrag } from 'react-dnd';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 const folder_color = blue[200];
 
@@ -39,8 +44,64 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Folder = ({ item, state, selectedState }) => {
+const changePath = (moveFolder, newPath, userState, allItems) => {
+
+	const userUID = userState.user.uid;
+
+	var currItems = allItems.filter(myItem => myItem.path.includes(moveFolder.path + "/" + moveFolder.name));
+
+	for(var currItem of currItems){
+
+		var idx = currItem.path.indexOf(moveFolder.name);
+
+
+		var str = currItem.path.substring(idx, currItem.path.length);
+
+		var newStr = newPath + "/" + str;
+
+		firebase.database().ref("users/" + userUID + "/" + currItem.id + "/path").set(newStr);
+
+	}
+
+
+	firebase.database().ref("users/" + userUID + "/" + moveFolder.id + "/path").set(newPath);
+
+	console.log("changepath called");
+
+}
+
+const Folder = ({ item, state, selectedState, userState, itemList}) => {
   const classes = useStyles();
+
+
+	const [{isDragging}, drag] = useDrag({
+	    item: {type: ItemTypes.BOX },
+
+	    end(itemBox, monitor) {
+	      const dropResult = monitor.getDropResult()
+	      if (item && dropResult) {
+	      	changePath(item, dropResult.newPath, userState, itemList);
+	      }
+	    },
+			collect: monitor => ({
+			isDragging: !!monitor.isDragging(),
+			}),
+	  })
+
+  const newPath = item.path + "/" + item.name;
+
+  const [, drop] = useDrop({
+	  accept: ItemTypes.BOX,
+	  drop: () => ({
+		name: `${newPath}`,
+      	newPath,
+	}),
+
+	collect: monitor => ({
+		isOver: monitor.isOver(),
+		canDrop: monitor.canDrop(),
+	})
+	})
 
   const handleSelection = () => {
     var id = inSelected()
@@ -71,29 +132,33 @@ const Folder = ({ item, state, selectedState }) => {
     }
   
   return (
-  <Grid item key={item.id}>
-    <Box>
-    <Paper
-      elevation={0}
-      className={classes.topleftbox}
-      square 
-      >
-        <Checkbox color="default"
-            checked = {inSelected() != undefined}
-            onChange={handleSelection}>
-        </Checkbox>
-      </Paper>
-    <Paper 
-      elevation={0}
-      className={classes.paper}
-      onClick={ () => state.setPath(state.path + "/" + item.name) }
-      >
-        <Box className={classes.name}>
-        { item.name }
-        </Box>
-    </Paper>
-    </Box>
-  </Grid>)
+  	<div ref={drag}>
+  	<div ref={drop}>
+	  <Grid item key={item.id}>
+	    <Box>
+	    <Paper
+	      elevation={0}
+	      className={classes.topleftbox}
+	      square 
+	      >
+	        <Checkbox color="default"
+	            checked = {inSelected() != undefined}
+	            onChange={handleSelection}>
+	        </Checkbox>
+	      </Paper>
+	    <Paper 
+	      elevation={0}
+	      className={classes.paper}
+	      onClick={ () => state.setPath(state.path + "/" + item.name) }
+	      >
+	        <Box className={classes.name}>
+	        { item.name }
+	        </Box>
+	    </Paper>
+	    </Box>
+	  </Grid>
+  </div>
+  </div>)
 
 // const handleSelection = () => {
   //   var found = false;
