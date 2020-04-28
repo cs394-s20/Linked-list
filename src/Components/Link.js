@@ -1,6 +1,6 @@
 import React from 'react';
 import 'rbx/index.css';
-import { Button, Grid, Paper, Box } from '@material-ui/core';
+import { Grid, Paper, Box } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
@@ -10,24 +10,7 @@ import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-  paper: {
-    width: "150px",
-    height: "150px",
-    borderColor: "#F50257",
-    borderWidth: "4px"
-  },
-  name: {
-    display: "block",
-    textAlign: "center",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-    paddingBottom: "10px",
-  },
-}));
+
 
 const changePath = (item, newPath, userState) => {
 
@@ -41,6 +24,25 @@ const changePath = (item, newPath, userState) => {
 }
 
 const Link = ({ item, state, userState }) => {
+  const useStyles = makeStyles((theme) => ({
+    button: {
+      margin: theme.spacing(1),
+    },
+    paper: {
+      width: "150px",
+      height: "150px",
+      borderColor: item.color,
+      borderWidth: "4px"
+    },
+    name: {
+      display: "block",
+      textAlign: "center",
+      paddingLeft: "10px",
+      paddingRight: "10px",
+      paddingBottom: "10px",
+    },
+  }));
+
   const classes = useStyles();
 
 

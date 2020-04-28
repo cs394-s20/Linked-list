@@ -32,23 +32,12 @@ const ItemList = ({ state,itemState, userState, selectedState }) => {
 
     useEffect(() => {
       pathItems = items.filter(item => item.path === state.path);
-      // for (item of pathItems) {
-      //   var found = false
-      //   for (selectedItemId in selectedState.selected.selectedItems) {
-      //       if (item.id == selectedItemId) {
-      //           found = true
-      //       }
-      //   if (!found) {
-      //     console.log("hi")
-      //   }
-      //   }
-      // }
-      //selectedState.setSelected({ selectedItems: []});
+
    }, [state.path])
     
    
     return (
-      <Grid container justify="center" spacing={2}>
+      <Grid container justify="center" spacing={4}>
         { 
           pathItems.map(item =>
             (item.type === "folder") ? 
