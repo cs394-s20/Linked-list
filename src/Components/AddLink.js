@@ -6,6 +6,7 @@ import 'rbx/index.css';
 import { Button, Modal, Field, Label, Control, Input, Container } from 'rbx';
 import '../index.css';
 import AddIcon from '@material-ui/icons/Add';
+import './colors.css';
 
 
 const closeModal = () => {
@@ -14,7 +15,7 @@ const closeModal = () => {
   document.getElementById("add-folder").style.display="block";
 }
 
-const updateJSON = ( { state, userState } ) => {
+const updateJSON = ( { state, userState }, color ) => {
   
   //might break 
   //var newItemKey = firebase.database().ref().child('items').push().key;
@@ -30,7 +31,8 @@ const updateJSON = ( { state, userState } ) => {
     "type": "link",
     "path": state.path,
     "url": document.getElementById('linkUrl').value,
-    "id": newItemKey
+    "id": newItemKey,
+    "color": color
   };
 
   // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -43,6 +45,12 @@ const updateJSON = ( { state, userState } ) => {
 
 const OpenModal = ( { state, userState }) => {
 //console.log(state.path);
+  var folderColor = "#DCDFE7"
+
+  const handleColor = (color) => {
+    folderColor = color;
+
+  };
   return (
     <div style={{color: "white !important"}}>
         <Modal.Background />
@@ -59,10 +67,16 @@ const OpenModal = ( { state, userState }) => {
               <Input id="linkUrl" type="text" placeholder="must be full url, ex: https://www.google.com"                />
             </Control>
           </Field>
+          <Button.Group style={{paddingTop:"10px"}} align="centered">
+            <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
+            <Button id="blue-btn" onClick ={() => handleColor("#3C72DE")}/>
+            
+
+          </Button.Group>
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
             <Button onClick = { () => closeModal()}>Cancel</Button>
-            <Button color="link" onClick = { () => updateJSON({state, userState})}>Add Link</Button>
+            <Button color="link" onClick = { () => updateJSON({state, userState}, folderColor)}>Add Link</Button>
           </Button.Group>
     </div>
 
