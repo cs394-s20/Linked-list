@@ -63,11 +63,15 @@ const OpenModal = ( { state, userState }) => {
               <Input id="folderTitle" type="text" placeholder="Classes" />
             </Control>
           </Field>
-            <Button.Group style={{paddingTop:"10px"}} align="centered">
-              <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
+          <Label style={{color:"white !important"}}>Folder Color</Label>
+            <Button.Group style={{paddingTop:"10px"}} >
+              <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
+              <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
+              <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
+              <Button id="aqua-btn" onClick ={() => handleColor("#43e6b5")}/>
               <Button id="blue-btn" onClick ={() => handleColor("#3C72DE")}/>
-              
-
+              <Button id="purple-btn" onClick ={() => handleColor("#7b1da3")}/>
+              <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
             </Button.Group>
           </Modal.Content>
           <Button.Group style={{paddingTop:"10px"}} align="centered">
