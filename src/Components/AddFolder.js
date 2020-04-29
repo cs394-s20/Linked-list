@@ -31,6 +31,7 @@ const updateJSON = ( { state, userState }, color ) => {
     "name": document.getElementById('folderTitle').value,
     "type": "folder",
     "path": state.path,
+    "note": document.getElementById("folderNote").value,
     "id": newItemKey,
     "color": color
   };
@@ -61,6 +62,12 @@ const OpenModal = ( { state, userState }) => {
             <Label style={{color:"white !important"}}>Folder Title</Label>
             <Control>
               <Input id="folderTitle" type="text" placeholder="Classes" />
+            </Control>
+          </Field>
+          <Field>
+            <Label>Folder Note</Label>
+            <Control>
+              <Input id="folderNote" type="text" placeholder="optional note (50 char limit)" maxlength="50"/>
             </Control>
           </Field>
           <Label style={{color:"white !important"}}>Folder Color</Label>

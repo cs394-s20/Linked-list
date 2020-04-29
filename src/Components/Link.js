@@ -10,8 +10,6 @@ import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-
-
 const changePath = (item, newPath, userState) => {
 
 	const userUID = userState.user.uid;
@@ -110,9 +108,12 @@ const Link = ({ item, state, userState }) => {
 	      checked = {inSelected() != undefined}
 	      onChange={handleSelection}>
 	    </Checkbox>
-	    <Box className={classes.name}>
-	    { item.name }
+      <Box className={classes.name} fontWeight="bold">
+        { item.name }
 	    </Box>
+      <Box className={classes.name} fontSize="70%" fontStyle="italic">
+        {item.note}
+      </Box>
 	  </Paper>
 	  </Grid>
   </div>)

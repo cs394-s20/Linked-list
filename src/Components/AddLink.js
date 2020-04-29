@@ -31,6 +31,7 @@ const updateJSON = ( { state, userState }, color ) => {
     "type": "link",
     "path": state.path,
     "url": document.getElementById('linkUrl').value,
+    "note": document.getElementById("linkNote").value,
     "id": newItemKey,
     "color": color
   };
@@ -65,6 +66,12 @@ const OpenModal = ( { state, userState }) => {
             <Label>Link URL</Label>
             <Control>
               <Input id="linkUrl" type="text" placeholder="must be full url, ex: https://www.google.com"                />
+            </Control>
+          </Field>
+          <Field>
+            <Label>Link Note</Label>
+            <Control>
+              <Input id="linkNote" type="text" placeholder="optional note (50 char limit)" maxlength="50"/>
             </Control>
           </Field>
           <Label style={{color:"white !important"}}>Link Color</Label>

@@ -68,6 +68,13 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
     paddingRight: "10px",
     paddingBottom: "10px",
     paddingTop: "15px"
+  },
+  note: {
+    display: "block",
+    textAlign: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    paddingBottom: "10px",
   }
 }));
   const classes = useStyles();
@@ -153,9 +160,12 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 	      className={classes.paper}
 	      onClick={ () => state.setPath(state.path + "/" + item.name) }
 	      >
-	        <Box className={classes.name}>
+	        <Box className={classes.name} fontWeight="bold">
 	        { item.name }
 	        </Box>
+          <Box className={classes.note} fontSize="70%" fontStyle="italic">
+            {item.note}
+          </Box>
 	    </Paper>
 	    </Box>
 	  </Grid>
