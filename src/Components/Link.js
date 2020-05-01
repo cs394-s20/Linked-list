@@ -1,6 +1,6 @@
 import React from 'react';
 import 'rbx/index.css';
-import { Grid, Paper, Box } from '@material-ui/core';
+import { Grid, Paper, Box, Button } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
@@ -9,9 +9,10 @@ import ItemTypes from './ItemTypes';
 import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
-
+import EditIcon from '@material-ui/icons/Edit';
+import OpenModal from "./AddLink.js";
+import EditModal from "./EditModal";
 const changePath = (item, newPath, userState) => {
-
 	const userUID = userState.user.uid;
 
 	// Write the new post's data simultaneously in the posts list and the user's post list.
@@ -90,8 +91,9 @@ const Link = ({ item, state, userState }) => {
     return undefined;
   }
 
-  return (
-  <div ref={drag}>
+
+  return (      
+  <div ref={drag}>   
 	  <Grid item key={item.id}>
 	    <Paper elevation={2} 
 	           variant="outlined"
@@ -108,6 +110,9 @@ const Link = ({ item, state, userState }) => {
 	      checked = {inSelected() != undefined}
 	      onChange={handleSelection}>
 	    </Checkbox>
+      <Button className="edit-button">
+        <EditIcon onClick={() => document.getElementById("edit-modal").style.display="block"} />
+      </Button>
       <Box className={classes.name} fontWeight="bold">
         { item.name }
 	    </Box>
@@ -115,8 +120,13 @@ const Link = ({ item, state, userState }) => {
         {item.note}
       </Box>
 	  </Paper>
+    
 	  </Grid>
-  </div>)
+    <div id="edit-modal" style={{ display: "None"}}>
+      <EditModal item={item} state={state} userState={userState} />
+    </div>
+  </div>
+  )
 };
 
 export default Link;

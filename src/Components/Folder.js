@@ -9,7 +9,7 @@ import { useDrop } from 'react-dnd';
 import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
-
+import OpenModal from "./AddFolder.js";
 const folder_color = blue[200];
 
 
