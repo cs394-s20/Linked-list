@@ -8,15 +8,14 @@ import '../index.css';
 import AddIcon from '@material-ui/icons/Add';
 import './colors.css';
 import { updateJSON } from './AddLink';
-const EditModal = ({item, state, userState}) => {
+const EditLink = ({item, state, userState}) => {
     console.log(item);
-    const editJSON = ({ item, state, userState }) => {
+    const editJSON = ({ item, userState }) => {
 
         const userUID = userState.user.uid;
         const thisItemKey = item.id;
-        console.log("link title" + document.getElementById('editLinkTitle').value);
         var newItem = {
-            "name": document.getElementById('editLinkTitle').value,
+            "name": document.getElementById('editLinkName').value,
             "type": "link",
             "path": item.path,
             "url": document.getElementById('editLinkUrl').value,
@@ -24,8 +23,6 @@ const EditModal = ({item, state, userState}) => {
             "id": thisItemKey,
             "color": item.color
         };
-        console.log(thisItemKey);
-        console.log(newItem);
         // Write the new post's data simultaneously in the posts list and the user's post list.
         firebase.database().ref("users/" + userUID + "/" + thisItemKey).set(newItem);
         closeModal();
@@ -33,7 +30,7 @@ const EditModal = ({item, state, userState}) => {
     }
     var folderColor = "#DCDFE7"
     const closeModal = () => {
-        document.getElementById("edit-modal").style.display="none";
+        document.getElementById("edit-link").style.display="none";
         document.getElementById("add-link").style.display="block";
         document.getElementById("add-folder").style.display="block";
       }
@@ -48,7 +45,7 @@ const EditModal = ({item, state, userState}) => {
             <Field>
                 <Label style={{color:"white !important"}}>Link Title</Label>
                 <Control>
-                <Input defaultValue={item.name} id="editLinkTitle" type="text" placeholder="Google" />
+                <Input defaultValue={item.name} id="editLinkName" type="text" placeholder="Google" />
                 </Control>
             </Field>
             <Field>
@@ -76,10 +73,10 @@ const EditModal = ({item, state, userState}) => {
             </Modal.Content>
             <Button.Group style={{paddingTop:"10px"}} align="centered">
                 <Button onClick = { () => closeModal()}>Cancel</Button>
-                <Button color="link" onClick = { () => editJSON({item, state, userState})}>Save</Button>
+                <Button color="link" onClick = { () => editJSON({item, userState})}>Save</Button>
             </Button.Group>
             </div>
         </Container>
     )
 };
-export default EditModal;
+export default EditLink;

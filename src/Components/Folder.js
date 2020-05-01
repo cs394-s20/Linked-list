@@ -1,6 +1,6 @@
 import React from 'react';
 // import 'rbx/index.css';
-import { Grid, Paper, Box } from '@material-ui/core';
+import { Grid, Paper, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -10,10 +10,11 @@ import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
 import OpenModal from "./AddFolder.js";
+import EditFolder from "./EditFolder";
+import EditIcon from '@material-ui/icons/Edit';
+//import { Button } from 'rbx';
+
 const folder_color = blue[200];
-
-
-
 const changePath = (moveFolder, newPath, userState, allItems) => {
 
 	const userUID = userState.user.uid;
@@ -43,7 +44,7 @@ const changePath = (moveFolder, newPath, userState, allItems) => {
 const Folder = ({ item, state, selectedState, userState, itemList}) => {
   const useStyles = makeStyles((theme) => ({
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
   paper: {
     width: "150px",
@@ -148,8 +149,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 	    <Paper
 	      elevation={0}
 	      className={classes.topleftbox}
-	      square 
-	      >
+	      square >
 	        <Checkbox color="default"
 	            checked = {inSelected() != undefined}
 	            onChange={handleSelection}>
@@ -157,18 +157,25 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 	      </Paper>
 	    <Paper 
 	      elevation={0}
-	      className={classes.paper}
-	      onClick={ () => state.setPath(state.path + "/" + item.name) }
-	      >
-	        <Box className={classes.name} fontWeight="bold">
-	        { item.name }
-	        </Box>
-          <Box className={classes.note} fontSize="70%" fontStyle="italic">
-            {item.note}
-          </Box>
+	      className={classes.paper} >
+          <div onClick={ () => state.setPath(state.path + "/" + item.name) }>
+            <Box className={classes.name} fontWeight="bold">
+              { item.name }
+            </Box>
+            <Box className={classes.note} fontSize="70%" fontStyle="italic">
+              {item.note}
+            </Box>
+          </div>
+          <Button className="edit-button">
+            <EditIcon onClick={() => document.getElementById("edit-folder").style.display="block"} />
+          </Button>
 	    </Paper>
+
 	    </Box>
 	  </Grid>
+    <div id="edit-folder" style={{ display: "None"}}>
+      <EditFolder item={item} state={state} userState={userState} />
+    </div>
   </div>
   </div>)
 

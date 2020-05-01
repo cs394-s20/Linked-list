@@ -11,7 +11,7 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import EditIcon from '@material-ui/icons/Edit';
 import OpenModal from "./AddLink.js";
-import EditModal from "./EditModal";
+import EditLink from "./EditLink";
 const changePath = (item, newPath, userState) => {
 	const userUID = userState.user.uid;
 
@@ -110,20 +110,19 @@ const Link = ({ item, state, userState }) => {
 	      checked = {inSelected() != undefined}
 	      onChange={handleSelection}>
 	    </Checkbox>
-      <Button className="edit-button">
-        <EditIcon onClick={() => document.getElementById("edit-modal").style.display="block"} />
-      </Button>
       <Box className={classes.name} fontWeight="bold">
         { item.name }
 	    </Box>
       <Box className={classes.name} fontSize="70%" fontStyle="italic">
         {item.note}
       </Box>
+      <Button className="edit-button">
+        <EditIcon onClick={() => document.getElementById("edit-link").style.display="block"} />
+      </Button>
 	  </Paper>
-    
 	  </Grid>
-    <div id="edit-modal" style={{ display: "None"}}>
-      <EditModal item={item} state={state} userState={userState} />
+    <div id="edit-link" style={{ display: "None"}}>
+      <EditLink item={item} state={state} userState={userState} />
     </div>
   </div>
   )
