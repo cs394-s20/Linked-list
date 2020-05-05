@@ -13,13 +13,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import OpenModal from "./AddLink.js";
 import EditLink from "./EditLink";
 const changePath = (item, newPath, userState) => {
-	const userUID = userState.user.uid;
+  if (newPath != ""){
+    const userUID = userState.user.uid;
 
-	// Write the new post's data simultaneously in the posts list and the user's post list.
-	firebase.database().ref("users/" + userUID + "/" + item.id + "/path").set(newPath);
-
-	console.log("changepath called");
-
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    firebase.database().ref("users/" + userUID + "/" + item.id + "/path").set(newPath);
+  
+    console.log("changepath called");
+  }
 }
 
 const Link = ({ item, state, userState }) => {

@@ -109,10 +109,11 @@ function App() {
           padding={1}
           bgcolor={ box_color}
           >
-                    
-          <Box component="div" marginBottom="10px">
-            <BackButton display="inline" state={ {path, setPath} } marginBottom="10px"/>
-         </Box>
+           <DndProvider backend={Backend}>     
+            <Box component="div" marginBottom="10px">
+              <BackButton display="inline" state={ {path, setPath} } marginBottom="10px"/>
+            </Box>
+          </DndProvider> 
             <DndProvider backend={Backend}>
             <ItemList state = { {path, setPath} } itemState = { { data, setData } } userState = { {user, setUser} } selectedState={ { selected, setSelected } }/>
             </DndProvider>

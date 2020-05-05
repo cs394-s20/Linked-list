@@ -3,36 +3,45 @@ import 'rbx/index.css';
 import { Button } from 'rbx';
 import { Fab } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import { useDrop } from 'react-dnd';
+import ItemTypes from './ItemTypes';
 
 const atHome = path => {
     return path === "/home"
 }
 
-const newPath = path => {
+const getNewPath = path => {
     const index = path.lastIndexOf("/")
     return path.substring(0, index)
 }
 
-const BackButton = ({ name, state }) => {
-    
+const BackButton = ({ state }) => {
+
+  const newPath = getNewPath(state.path);
+
+  const [, drop] = useDrop({
+      accept: ItemTypes.BOX,
+      drop: () => ({
+        name: `${newPath}`,
+          newPath,
+      }),
+      collect: monitor => ({
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+      })
+  })
     
   return (
-  <Button
+    <div ref={drop}>
+      <Button
         display="inline"
         aria-label="add"
-        onClick={ () => state.setPath(newPath(state.path))} 
+        onClick={ () => state.setPath(getNewPath(state.path))} 
         disabled = { atHome(state.path) } >
         <KeyboardBackspaceIcon />
-  </Button>)
+      </Button>
+    </div>)
 
 };
-
-// const Folder = ({ name }) => {
-// 	console.log("Folder");
-//   return (<Button  >
-//        { name }
-//   </Button>)
-
-// };
 
 export default BackButton;

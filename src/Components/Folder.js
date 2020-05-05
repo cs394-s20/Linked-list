@@ -15,30 +15,19 @@ import EditIcon from '@material-ui/icons/Edit';
 //import { Button } from 'rbx';
 
 const folder_color = blue[200];
+
 const changePath = (moveFolder, newPath, userState, allItems) => {
-
-	const userUID = userState.user.uid;
-
-	var currItems = allItems.filter(myItem => myItem.path.includes(moveFolder.path + "/" + moveFolder.name));
-
-	for(var currItem of currItems){
-
-		var idx = currItem.path.indexOf(moveFolder.name);
-
-
-		var str = currItem.path.substring(idx, currItem.path.length);
-
-		var newStr = newPath + "/" + str;
-
-		firebase.database().ref("users/" + userUID + "/" + currItem.id + "/path").set(newStr);
-
-	}
-
-
-	firebase.database().ref("users/" + userUID + "/" + moveFolder.id + "/path").set(newPath);
-
-	console.log("changepath called");
-
+  if (newPath != ""){
+    const userUID = userState.user.uid;
+    var currItems = allItems.filter(myItem => myItem.path.includes(moveFolder.path + "/" + moveFolder.name));
+    for(var currItem of currItems){
+      var idx = currItem.path.indexOf(moveFolder.name);
+      var str = currItem.path.substring(idx, currItem.path.length);
+      var newStr = newPath + "/" + str;
+      firebase.database().ref("users/" + userUID + "/" + currItem.id + "/path").set(newStr);
+    }
+    firebase.database().ref("users/" + userUID + "/" + moveFolder.id + "/path").set(newPath);
+  }
 }
 
 const Folder = ({ item, state, selectedState, userState, itemList}) => {
@@ -102,12 +91,11 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 	  drop: () => ({
 		name: `${newPath}`,
       	newPath,
-	}),
-
-	collect: monitor => ({
+    }),
+    collect: monitor => ({
 		isOver: monitor.isOver(),
 		canDrop: monitor.canDrop(),
-	})
+	  })
 	})
 
   const handleSelection = () => {
