@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import 'rbx/index.css';
 import '../index.css';
 import AddIcon from '@material-ui/icons/Add';
 import './colors.css';

@@ -1,7 +1,5 @@
 import React from 'react';
-import 'rbx/index.css';
-import { Button } from 'rbx';
-import { Fab } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { useDrop } from 'react-dnd';
 import ItemTypes from './ItemTypes';
@@ -34,6 +32,7 @@ const BackButton = ({ state }) => {
   return (
     <div ref={drop}>
       <Button
+        variant = "contained"
         display="inline"
         aria-label="add"
         onClick={ () => state.setPath(getNewPath(state.path))} 

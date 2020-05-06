@@ -1,5 +1,4 @@
 import React from 'react';
-import 'rbx/index.css';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';

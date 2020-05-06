@@ -1,5 +1,4 @@
 import React from 'react';
-import 'rbx/index.css';
 import { Grid, Paper, Box, Button, Modal, Container, TextField, ButtonGroup } from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +10,6 @@ import firebase from 'firebase/app';
 import 'firebase/database';
 import EditIcon from '@material-ui/icons/Edit';
 import OpenModal from "./AddLink.js";
-import EditLink from "./EditLink";
 
 const changePath = (item, newPath, userState) => {
   if (newPath != ""){
@@ -86,7 +84,7 @@ const Link = ({ item, state, userState }) => {
 
   const classes = useStyles();
 
-  const editJSON = ({ item, userState }) => {
+  const editJSON = ({ item, userState }, folderColor) => {
 
     const userUID = userState.user.uid;
     const thisItemKey = item.id;
@@ -97,7 +95,7 @@ const Link = ({ item, state, userState }) => {
         "url": document.getElementById('editLinkUrl').value,
         "note": document.getElementById('editLinkNote').value,
         "id": thisItemKey,
-        "color": item.color
+        "color": folderColor
     };
     // Write the new post's data simultaneously in the posts list and the user's post list.
     firebase.database().ref("users/" + userUID + "/" + thisItemKey).set(newItem);
@@ -123,7 +121,7 @@ const Link = ({ item, state, userState }) => {
       </ButtonGroup>
       <ButtonGroup>
         <Button onClick = {handleClose}>Cancel</Button>
-        <Button onClick = { () => editJSON({item, userState})}>Save</Button>
+        <Button onClick = { () => editJSON({item, userState}, folderColor)}>Save</Button>
       </ButtonGroup>
     </div>
   );

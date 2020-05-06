@@ -1,6 +1,5 @@
 import React from 'react';
-// import 'rbx/index.css';
-import { Grid, Paper, Box, Button } from '@material-ui/core';
+import { Grid, Paper, Box, Button, Modal, TextField, ButtonGroup } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -9,10 +8,7 @@ import { useDrop } from 'react-dnd';
 import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import OpenModal from "./AddFolder.js";
-import EditFolder from "./EditFolder";
 import EditIcon from '@material-ui/icons/Edit';
-//import { Button } from 'rbx';
 
 const folder_color = blue[200];
 
@@ -30,7 +26,31 @@ const changePath = (moveFolder, newPath, userState, allItems) => {
   }
 }
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+var folderColor = "#DCDFE7"
+
+const handleColor = (color) => {
+  folderColor = color;
+};
+
 const Folder = ({ item, state, selectedState, userState, itemList}) => {
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+
   const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1)
@@ -65,10 +85,64 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
     paddingLeft: "10px",
     paddingRight: "10px",
     paddingBottom: "10px",
-  }
+  },
+  ModalPaper: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
 }));
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const classes = useStyles();
 
+  const editJSON = ({ item, userState }, folderColor) => {
+    const userUID = userState.user.uid;
+    const thisItemKey = item.id;
+    var newItem = {
+        "name": document.getElementById('editFolderName').value,
+        "type": "folder",
+        "path": item.path,
+        "note": document.getElementById('editFolderNote').value,
+        "id": thisItemKey,
+        "color": folderColor
+    };
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    firebase.database().ref("users/" + userUID + "/" + thisItemKey).set(newItem);
+    handleClose();
+}
+
+  const body = (
+    <div style={modalStyle} className={classes.ModalPaper}>
+      <h2 id="simple-modal-title">Edit Folder</h2>
+      <TextField id="editFolderName" label="Folder Title" defaultValue={item.name} />
+      <TextField id="editFolderNote" label="Note" defaultValue={item.note} helperText="optional note (50 char limit)" inputProps={{ maxLength: 50, }}/>
+      <h1>Folder Color</h1>
+      <ButtonGroup style={{paddingTop:"10px"}} >
+          <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
+          <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
+          <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
+          <Button id="aqua-btn" onClick ={() => handleColor("#43e6b5")}/>
+          <Button id="blue-btn" onClick ={() => handleColor("#3C72DE")}/>
+          <Button id="purple-btn" onClick ={() => handleColor("#7b1da3")}/>
+          <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
+      </ButtonGroup>
+      <ButtonGroup>
+        <Button onClick = {handleClose}>Cancel</Button>
+        <Button onClick = { () => editJSON({item, userState}, folderColor)}>Save</Button>
+      </ButtonGroup>
+    </div>
+  );
 
 	const [{isDragging}, drag] = useDrag({
 	    item: {type: ItemTypes.BOX },
@@ -125,9 +199,6 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
       }
       return undefined;
     }
-
-  console.log(item.color);
-  console.log(item);
   
   return (
   	<div ref={drag}>
@@ -155,15 +226,19 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
             </Box>
           </div>
           <Button className="edit-button">
-            <EditIcon onClick={() => document.getElementById("edit-folder").style.display="block"} />
+            <EditIcon onClick={handleOpen}/>
           </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="simple-modal-title"
+          >
+          {body}
+        </Modal>
 	    </Paper>
 
 	    </Box>
 	  </Grid>
-    <div id="edit-folder" style={{ display: "None"}}>
-      <EditFolder item={item} state={state} userState={userState} />
-    </div>
   </div>
   </div>)
 
