@@ -56,6 +56,7 @@ const OpenLinksButton = ({ state, itemState, userState }) => {
           itemRef = firebase.database().ref("users/" + userState.user.uid + "/" + id);
           console.log(itemRef);
           openLinks(itemRef);
+          state.setSelected({ selectedItems: []});
           
         } else {
           //get everything that starts with folder pathname
@@ -77,6 +78,7 @@ const OpenLinksButton = ({ state, itemState, userState }) => {
               }
             });
           });
+          state.setSelected({ selectedItems: []});
         } 
       });  
     }

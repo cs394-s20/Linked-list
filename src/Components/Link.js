@@ -4,6 +4,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
 import ItemTypes from './ItemTypes';
 import { useDrag } from 'react-dnd';
 import firebase from 'firebase/app';
@@ -195,7 +196,9 @@ const Link = ({ item, state, userState }) => {
         <EditIcon fontSize={"small"} onClick={handleOpen}/>
       </Button>
       <Box className={classes.name} fontWeight="bold">
-        { item.name }
+        <Typography style={{ wordWrap: "break-word" }}>
+          { item.name }
+        </Typography>
 	    </Box>
       <Box className={classes.name} fontSize="70%" fontStyle="italic">
         {item.note}
