@@ -217,6 +217,9 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 	            checked = {inSelected() != undefined}
 	            onChange={handleSelection}>
 	        </Checkbox>
+          <Button style={{ minWidth:"0px"}} size={"small"} className="edit-button">
+            <EditIcon fontSize={"small"} onClick={handleOpen}/>
+          </Button>
 	      </Paper>
 	    <Paper 
 	      elevation={0}
@@ -229,9 +232,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
               {item.note}
             </Box>
           </div>
-          <Button className="edit-button">
-            <EditIcon onClick={handleOpen}/>
-          </Button>
+          
         <Modal
           open={open}
           onClose={handleClose}

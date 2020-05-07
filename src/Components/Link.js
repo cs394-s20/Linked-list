@@ -191,15 +191,15 @@ const Link = ({ item, state, userState }) => {
 	      checked = {inSelected() != undefined}
 	      onChange={handleSelection}>
 	    </Checkbox>
+      <Button style={{ minWidth:"0px", marginLeft:"60px"}} className="edit-button">
+        <EditIcon fontSize={"small"} onClick={handleOpen}/>
+      </Button>
       <Box className={classes.name} fontWeight="bold">
         { item.name }
 	    </Box>
       <Box className={classes.name} fontSize="70%" fontStyle="italic">
         {item.note}
       </Box>
-      <Button className="edit-button">
-        <EditIcon onClick={handleOpen}/>
-      </Button>
       <Modal
         open={open}
         onClose={handleClose}
