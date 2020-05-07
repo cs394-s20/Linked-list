@@ -47,6 +47,12 @@ const Link = ({ item, state, userState }) => {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
+  const [colorState, setColor] = React.useState("#DCDFE7");
+
+  const handleColor = (color) => {
+    setColor(color);
+  };
+
   const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing(1),
@@ -72,6 +78,10 @@ const Link = ({ item, state, userState }) => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+
+    linkColor: {
+      backgroundColor: colorState,
+    }
   }));
 
   const handleOpen = () => {
@@ -109,8 +119,7 @@ const Link = ({ item, state, userState }) => {
       <TextField id="editLinkName" label="Link Title" defaultValue={item.name} />
       <TextField id="editLinkUrl" label="Link URL" defaultValue={item.url} helperText="must be full url, ex: https://www.google.com"/>
       <TextField id="editLinkNote" label="Note" defaultValue={item.note} helperText="optional note (50 char limit)" inputProps={{ maxLength: 50, }}/>
-      <h1>Link Color</h1>
-      <ButtonGroup style={{paddingTop:"10px"}} >
+      <ButtonGroup style={{paddingTop:"10px", paddingBottom:"10px"}} >
           <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
           <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
           <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
@@ -121,7 +130,7 @@ const Link = ({ item, state, userState }) => {
       </ButtonGroup>
       <ButtonGroup>
         <Button onClick = {handleClose}>Cancel</Button>
-        <Button onClick = { () => editJSON({item, userState}, folderColor)}>Save</Button>
+        <Button className = {classes.linkColor} onClick = { () => editJSON({item, userState}, colorState)}>Save</Button>
       </ButtonGroup>
     </div>
   );

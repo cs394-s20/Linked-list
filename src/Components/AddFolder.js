@@ -11,10 +11,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const AddFolder = ( { state, userState } ) => {
-  var folderColor = "#DCDFE7"
-  const handleColor = (color) => {
-    folderColor = color;
 
+  const [colorState, setColor] = React.useState("#DCDFE7");
+
+  const handleColor = (color) => {
+    setColor(color);
   };
 
   function rand() {
@@ -41,6 +42,11 @@ const AddFolder = ( { state, userState } ) => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+
+    folderColor: {
+      backgroundColor: colorState,
+    },
+
   }));
 
   const classes = useStyles();
@@ -81,19 +87,18 @@ const AddFolder = ( { state, userState } ) => {
       <h2 id="simple-modal-title">Add Folder</h2>
       <TextField id="folderTitle" label="Folder Title" />
       <TextField id="folderNote" label="Note" helperText="optional note (50 char limit)" inputProps={{ maxLength: 50, }}/>
-      <h1>Folder Color</h1>
-      <ButtonGroup style={{paddingTop:"10px"}} >
+      <ButtonGroup style={{paddingTop:"10px", paddingBottom:"10px"}} >
           <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
           <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
           <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
           <Button id="aqua-btn" onClick ={() => handleColor("#43e6b5")}/>
           <Button id="blue-btn" onClick ={() => handleColor("#3C72DE")}/>
-          <Button id="purple-btn" onClick ={() => handleColor("#7b1da3")}/>
+          <Button id="purple-btn" onClick ={() => handleColor("#8F3E97")}/>
           <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
       </ButtonGroup>
       <ButtonGroup>
         <Button onClick = {handleClose}>Cancel</Button>
-        <Button onClick = { () => updateJSON({state, userState}, folderColor)}>Add Folder</Button>
+        <Button className = {classes.folderColor} onClick = { () => updateJSON({state, userState}, colorState)}>Add Folder</Button>
       </ButtonGroup>
     </div>
   );

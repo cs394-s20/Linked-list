@@ -41,15 +41,17 @@ function getModalStyle() {
   };
 }
 
-var folderColor = "#DCDFE7"
 
-const handleColor = (color) => {
-  folderColor = color;
-};
 
 const Folder = ({ item, state, selectedState, userState, itemList}) => {
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+
+  const [colorState, setColor] = React.useState("#DCDFE7");
+
+  const handleColor = (color) => {
+    setColor(color);
+  };
 
   const useStyles = makeStyles((theme) => ({
   button: {
@@ -94,6 +96,9 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+    folderColor: {
+      backgroundColor: colorState,
+    },
 }));
 
   const handleOpen = () => {
@@ -106,7 +111,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
 
   const classes = useStyles();
 
-  const editJSON = ({ item, userState }, folderColor) => {
+  const editJSON = ({ item, userState }, colorState) => {
     const userUID = userState.user.uid;
     const thisItemKey = item.id;
     var newItem = {
@@ -115,7 +120,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
         "path": item.path,
         "note": document.getElementById('editFolderNote').value,
         "id": thisItemKey,
-        "color": folderColor
+        "color": colorState
     };
     // Write the new post's data simultaneously in the posts list and the user's post list.
     firebase.database().ref("users/" + userUID + "/" + thisItemKey).set(newItem);
@@ -127,8 +132,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
       <h2 id="simple-modal-title">Edit Folder</h2>
       <TextField id="editFolderName" label="Folder Title" defaultValue={item.name} />
       <TextField id="editFolderNote" label="Note" defaultValue={item.note} helperText="optional note (50 char limit)" inputProps={{ maxLength: 50, }}/>
-      <h1>Folder Color</h1>
-      <ButtonGroup style={{paddingTop:"10px"}} >
+      <ButtonGroup style={{paddingTop:"10px", paddingBottom:"10px"}} >
           <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
           <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
           <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
@@ -139,7 +143,7 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
       </ButtonGroup>
       <ButtonGroup>
         <Button onClick = {handleClose}>Cancel</Button>
-        <Button onClick = { () => editJSON({item, userState}, folderColor)}>Save</Button>
+        <Button className = {classes.folderColor} onClick = { () => editJSON({item, userState}, colorState)}>Save</Button>
       </ButtonGroup>
     </div>
   );

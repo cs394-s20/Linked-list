@@ -8,13 +8,13 @@ import './colors.css';
 import { Modal, Container, Button, InputLabel, TextField, ButtonGroup} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-var folderColor = "#DCDFE7"
-
-const handleColor = (color) => {
-  folderColor = color;
-};
-
 const AddLink = ( { state, userState } ) => {
+
+  const [colorState, setColor] = React.useState("#DCDFE7");
+
+  const handleColor = (color) => {
+    setColor(color);
+  };
 
   function rand() {
     return Math.round(Math.random() * 20) - 10;
@@ -40,6 +40,16 @@ const AddLink = ( { state, userState } ) => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+
+    buttonBorder: {
+      borderRight: "3px solid black",
+      border: "3px solid black",
+    },
+
+    linkColor: {
+      backgroundColor: colorState,
+    }
+
   }));
 
   const classes = useStyles();
@@ -68,19 +78,18 @@ const AddLink = ( { state, userState } ) => {
       <TextField id="linkTitle" label="Link Title" />
       <TextField id="linkUrl" label="Link URL" helperText="must be full url, ex: https://www.google.com"/>
       <TextField id="linkNote" label="Note" helperText="optional note (50 char limit)" inputProps={{ maxLength: 50, }}/>
-      <h1>Link Color</h1>
-      <ButtonGroup style={{paddingTop:"10px"}} >
+      <ButtonGroup style={{paddingTop:"10px", paddingBottom: "10px"}} >
           <Button id="red-btn" onClick ={() => handleColor("#e64343")}/>
           <Button id="yellow-btn" onClick ={() => handleColor("#f2e874")}/>
           <Button id="green-btn" onClick ={() => handleColor("#24960e")}/>
           <Button id="aqua-btn" onClick ={() => handleColor("#43e6b5")}/>
           <Button id="blue-btn" onClick ={() => handleColor("#3C72DE")}/>
-          <Button id="purple-btn" onClick ={() => handleColor("#7b1da3")}/>
+          <Button id="purple-btn" onClick ={() => handleColor("#8F3E97")}/>
           <Button id="pink-btn" onClick ={() => handleColor("#D23CDE")}/>
       </ButtonGroup>
       <ButtonGroup>
         <Button onClick = {handleClose}>Cancel</Button>
-        <Button onClick = { () => updateJSON({state, userState}, folderColor)}>Add Link</Button>
+        <Button className = {classes.linkColor} onClick = { () => updateJSON({state, userState}, colorState)}>Add Link</Button>
       </ButtonGroup>
     </div>
   );
