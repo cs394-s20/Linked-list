@@ -1,7 +1,7 @@
 import React from 'react';
 import LinkIcon from '@material-ui/icons/Link';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import Checkbox from '@material-ui/core/Checkbox';
 import firebase from 'firebase/app';
@@ -54,9 +54,11 @@ const DeleteLinksButton = ({ state, itemState, userState }) => {
   }
 
   return (
-  <Button variant = "contained" className={classes.button} id="delete-link" onClick={ deleteLinks }>
-    <DeleteIcon/>
-  </Button>)
+    <Container>
+    <Button variant = "contained" className={classes.button} id="delete-link" onClick={ deleteLinks }>
+      <DeleteIcon/>
+    </Button>
+  </Container>)
 };
 
 export default DeleteLinksButton;

@@ -86,23 +86,23 @@ function App() {
   return ( 
     <div>
       <Authentication state={ {user, setUser} } />
-    <Box margin={15} justifyContent="center">
-      <Box textAlign="center" justifyContent="center" height="100px">
+    <Box margin={15} justifyContent="center" margin="20px !important">
+      <Box textAlign="center" justifyContent="center" marginBottom="20px">
         <img src={logo} alt="Logo"/>
       </Box>
       <Box>
         <Box marginTop="10px">
-          <Grid container justify="center" spacing={2}>
-            <Grid item key="add-link-button">
-              <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
+            <Grid container justify='center' style={{paddingBottom: "10px"}}>
+              <Grid item key="add-link-button">
+                <AddLink state = { {path, setPath} } userState= {{user, setUser}} />
+              </Grid>
+              <Grid item key="add-folder-button">
+                <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
+              </Grid>
+              <Grid item key="delete-link-button">
+                <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
+              </Grid>
             </Grid>
-            <Grid item key="add-folder-button">
-              <AddFolder state = { {path, setPath}} userState = {{user, setUser}} />
-            </Grid>
-            <Grid item key="delete-link-button">
-              <DeleteLinksButton state={ {selected, setSelected} } itemState = { { data, setData } } userState = { {user, setUser} }/>
-            </Grid>
-          </Grid>
           <Box 
           borderRadius={10}
           padding={1}
