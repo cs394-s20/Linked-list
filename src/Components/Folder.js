@@ -114,16 +114,26 @@ const Folder = ({ item, state, selectedState, userState, itemList}) => {
   const editJSON = ({ item, userState }, colorState) => {
     const userUID = userState.user.uid;
     const thisItemKey = item.id;
+    const newName = document.getElementById('editFolderName').value;
     var newItem = {
-        "name": document.getElementById('editFolderName').value,
+        "name": newName,
         "type": "folder",
         "path": item.path,
         "note": document.getElementById('editFolderNote').value,
         "id": thisItemKey,
         "color": colorState
     };
+
+    var currItems = itemList.filter(myItem => myItem.path.includes(item.path + "/" + item.name));
+    for(var currItem of currItems){
+
+      var newPath = currItem.path.replace(item.name, newName);
+      firebase.database().ref("users/" + userUID + "/" + currItem.id + "/path").set(newPath);
+    }
+
     // Write the new post's data simultaneously in the posts list and the user's post list.
     firebase.database().ref("users/" + userUID + "/" + thisItemKey).set(newItem);
+
     handleClose();
 }
 
